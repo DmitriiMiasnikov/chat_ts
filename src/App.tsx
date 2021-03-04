@@ -1,10 +1,21 @@
 import React from 'react';
+import { Redirect, Route, Switch } from 'react-router';
 import styles from './App.module.scss';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
 
 const App = () => {
   return (
     <div className={styles.app}>
-      app
+      <div className={styles.header}>
+        <Header />
+      </div>
+      <div className={styles.content}>
+        <Switch>
+          <Redirect exact from={'/'} to={'/main'} />
+          <Route path={'/main'} render={() => <Main />} />
+        </Switch>
+      </div>
     </div>
   );
 }
