@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/'
+  baseURL: 'https://chats-api-27.herokuapp.com/'
 })
 
 export const userApi = {
@@ -20,8 +20,16 @@ export const userApi = {
 }
 
 export const chatApi = {
+  async createNew(chatTitle, userId) {
+    const res = await instance.post(`chats/create/?chatTitle=${chatTitle}&userId=${userId}`);
+    return res;
+  },
   async getList(page) {
     const res = await instance.get(`chats/list/${page}`)
+    return res;
+  },
+  async getChat(chatId) {
+    const res = await instance.get(`chats/id/${chatId}`)
     return res;
   }
 }
