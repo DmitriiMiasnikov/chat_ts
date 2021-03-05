@@ -18,3 +18,10 @@ export const userApi = {
     return res;
   }
 }
+
+export const chatApi = {
+  async getList(page) {
+    const res = await instance.get(`chats/list/${page}`)
+    return res;
+  }
+}
