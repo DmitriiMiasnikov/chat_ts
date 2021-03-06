@@ -35,8 +35,8 @@ const App = (props: Props) => {
 
 const mapStatesToProps = (state: any) => {
   return {
-    showAuthorization: state.mainSettings.showAuthorization,
-    showRegistration: state.mainSettings.showRegistration
+    showAuthorization: state.auth.showAuthorization,
+    showRegistration: state.auth.showRegistration
   }
 }
 
