@@ -3,7 +3,9 @@ import { NavLink } from 'react-router-dom';
 import styles from './Header.module.scss';
 
 type Props = {
-  headerItems: {title: string, link: string}[]
+  headerItems: {title: string, link: string}[],
+  headerItemsRight: {title: string, name: string}[],
+  authHandler: (name: string) => void
 }
 
 export const HeaderDom = (props: Props) => {
@@ -17,6 +19,15 @@ export const HeaderDom = (props: Props) => {
             </NavLink>
           })
         }
+      </div>
+      <div className={styles.itemsRight}>
+        {props.headerItemsRight.map((el:any ,i:number) => {
+          return (
+            <div className={styles.itemRight} key={i} onClick={() => props.authHandler(el.name)}>
+              {el.title}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
