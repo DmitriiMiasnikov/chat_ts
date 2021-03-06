@@ -61,3 +61,15 @@ export const registrationUser = (userName: string, password: string, email: stri
     }
   }
 }
+
+export const authorizationUser = (userName: string, password: string) => {
+  return async (dispatch: any) => {
+    const res = await userApi.authorization(userName, password);
+    if (res.data.isAuth) {
+      dispatch(setIsAuth(true));
+      dispatch(setCurrentUser(res.data.user))
+    } else {
+      dispatch(setIsAuth(false));
+    }
+  }
+}
