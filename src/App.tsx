@@ -14,6 +14,7 @@ type Props = {
   showRegistration: boolean
 }
 const App = (props: Props) => {
+  console.log(props);
   return (
     <div className={styles.app}>
       <div className={styles.header}>

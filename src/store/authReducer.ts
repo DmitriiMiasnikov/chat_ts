@@ -45,8 +45,8 @@ export const setShowAuthorization = (show: boolean) => {
 export const setShowRegistration = (show: boolean) => {
   return { type: SET_SHOW_REGISTRATION, show }
 }
-export const setIsAuth = (auth: boolean) => {
-  return { type: SET_IS_AUTH, auth }
+export const setIsAuth = (isAuth: boolean) => {
+  return { type: SET_IS_AUTH, isAuth }
 }
 export const setCurrentUser = (user: any) => {
   return { type: SET_CURRENT_USER, user }
@@ -58,6 +58,7 @@ export const registrationUser = (userName: string, password: string, email: stri
     if (res.data.isAuth) {
       dispatch(setIsAuth(true))
       dispatch(setCurrentUser(res.data.user));
+      dispatch(setShowRegistration(false));
     }
   }
 }
@@ -65,11 +66,10 @@ export const registrationUser = (userName: string, password: string, email: stri
 export const authorizationUser = (userName: string, password: string) => {
   return async (dispatch: any) => {
     const res = await userApi.authorization(userName, password);
+    dispatch(setIsAuth(res.data.isAuth));
     if (res.data.isAuth) {
-      dispatch(setIsAuth(true));
       dispatch(setCurrentUser(res.data.user))
-    } else {
-      dispatch(setIsAuth(false));
+      dispatch(setShowAuthorization(false));
     }
   }
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { RegistrationDom } from './RegistrationDom';
-import { Redirect } from 'react-router-dom';
 import { setShowRegistration, registrationUser } from './../../store/authReducer';
 
 type Props = {
@@ -18,11 +17,7 @@ const Registration = (props: Props) => {
   const closeRegistration = () => {
     props.setShowRegistration(false);
   }
-  if (props.isAuth) {
-    return (
-      <Redirect to='/' />
-    )
-  }
+
   return (
     <RegistrationDom {...props} registrationHandler={registrationHandler} closeRegistration={closeRegistration} />
   )

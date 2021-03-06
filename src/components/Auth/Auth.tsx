@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { AuthDom } from './AuthDom';
-import { Redirect } from 'react-router-dom';
 import { setShowAuthorization, authorizationUser } from './../../store/authReducer';
 
 type Props = {
@@ -19,11 +18,6 @@ const Auth = (props: Props) => {
     props.setShowAuthorization(false);
   }
 
-  if (props.isAuth) {
-    return (
-      <Redirect to='/' />
-    )
-  }
   return (
     <AuthDom {...props} authHandler={authHandler} closeAuthorization={closeAuthorization}/>
   )
