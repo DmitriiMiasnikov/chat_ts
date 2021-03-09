@@ -43,10 +43,10 @@ export const ChatsDom = (props: Props) => {
         />
       </div>}
       {Boolean(props.chats.length) && <div className={styles.list}>
-              {props.chats.map((el:any, i: number) => {
-                return <ListItem item={el} key={i} />
-              })}
-        </div>}
+        {props.chats.map((el: any, i: number) => {
+          return <ListItem item={el} key={i} />
+        })}
+      </div>}
     </div>
   )
 }

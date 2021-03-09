@@ -7,7 +7,6 @@ type Props = {
 }
 
 const ListItem = (props: Props) => {
-
   return (
     <ListItemDom {...props} />
   )
