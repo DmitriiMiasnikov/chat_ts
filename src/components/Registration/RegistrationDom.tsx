@@ -7,18 +7,18 @@ import { Form, Field } from 'react-final-form';
 type Props = {
   closeRegistration: () => void,
   registrationHandler: any,
-  inputsRegistration: {name: string, text: string}[]
+  inputsRegistration: { name: string, text: string }[]
 }
 
 export const RegistrationDom = (props: Props) => {
   return (
     <div className={classnames(styles.wrapper, styles.show)}>
       <div className={styles.registrationBlock}>
-      <div onClick={() => props.closeRegistration()} className={styles.close}>
-        <img src={close} alt=''/>
-      </div>
+        <div onClick={() => props.closeRegistration()} className={styles.close}>
+          <img src={close} alt='' />
+        </div>
         <div className={styles.title}>
-        Регистрация
+          Регистрация
         </div>
         <Form
           onSubmit={props.registrationHandler}

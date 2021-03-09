@@ -5,7 +5,10 @@ const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT';
 
 const initialState = {
   chats: [],
-  currentChat: null
+  currentChat: null,
+  inputsCreateChat: [
+    {name: 'chatTitle', text: 'Введите название нового чата'},
+  ]
 }
 
 export const chatReducer = (state = initialState, action: any) => {
