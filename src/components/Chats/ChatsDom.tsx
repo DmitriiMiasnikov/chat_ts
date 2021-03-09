@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Chats.module.scss';
 import { Form, Field } from 'react-final-form';
 import classnames from 'classnames';
+import ListItem from './ListItem/ListItem';
 
 type Props = {
   chats: any,
@@ -25,7 +26,6 @@ export const ChatsDom = (props: Props) => {
                       <Field name={el.name}>
                         {({ input, meta }) => (
                           <div>
-                            {/* <label>*</label> */}
                             <input {...input} type={'text'} placeholder={el.text} />
                             {meta.error && meta.touched && <div className={styles.error}>{meta.error}</div>}
                           </div>
@@ -42,8 +42,11 @@ export const ChatsDom = (props: Props) => {
           )}
         />
       </div>}
-      Chats
-
+      {Boolean(props.chats.length) && <div className={styles.list}>
+              {props.chats.map((el:any, i: number) => {
+                return <ListItem item={el} key={i} />
+              })}
+        </div>}
     </div>
   )
 }
