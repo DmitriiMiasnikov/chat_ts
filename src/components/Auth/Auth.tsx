@@ -17,7 +17,6 @@ const Auth = (props: Props) => {
   const closeAuthorization = () => {
     props.setShowAuthorization(false);
   }
-
   return (
     <AuthDom {...props} authHandler={authHandler} closeAuthorization={closeAuthorization}/>
   )

@@ -8,10 +8,11 @@ type Props = {
   headerItemsRight: { title: string, name: string }[],
   setShowAuthorization: (show: boolean) => void,
   setShowRegistration: (show: boolean) => void,
+  isAuth: boolean,
+  currentUser: {email: string, userName: string, _id: string}
 }
 
 const Header = (props: Props) => {
-
   const authHandler = (name: string) => {
     if (name === 'registration') {
       props.setShowRegistration(true);
@@ -28,7 +29,9 @@ const Header = (props: Props) => {
 const mapStatesToProps = (state: any) => {
   return {
     headerItems: state.header.headerItems,
-    headerItemsRight: state.header.headerItemsRight
+    headerItemsRight: state.header.headerItemsRight,
+    isAuth: state.auth.isAuth,
+    currentUser: state.auth.currentUser
   }
 }
 export default connect(mapStatesToProps, { setShowAuthorization, setShowRegistration })(Header)

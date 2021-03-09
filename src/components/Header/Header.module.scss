@@ -33,6 +33,11 @@
         cursor: pointer;
         background-color: rgba(0, 0, 0, 0.082);
       }
+      &.account {
+        font-weight: bold;
+        color: #d22c2c;
+        font-size: 20px;
+      }
     }
   }
 }

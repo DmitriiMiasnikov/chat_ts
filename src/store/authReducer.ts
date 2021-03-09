@@ -33,6 +33,9 @@ export const authReducer = (state = initialState, action: any) => {
     case (SET_IS_AUTH): {
       return { ...state, isAuth: action.isAuth }
     }
+    case (SET_CURRENT_USER): {
+      return { ...state, currentUser: action.user }
+    }
     default: break;
   }
   return state
