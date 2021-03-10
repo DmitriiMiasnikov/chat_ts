@@ -7,8 +7,9 @@ type Props = {
 }
 
 const ListItem = (props: Props) => {
+  let date = new Date(props.item.date);
   return (
-    <ListItemDom {...props} />
+    <ListItemDom {...props} date={date}/>
   )
 }
 

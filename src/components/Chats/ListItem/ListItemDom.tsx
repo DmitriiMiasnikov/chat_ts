@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './ListItem.module.scss';
 
 type Props = {
-  item: { userName: string, title: string, date: string }
+  item: { userName: string, title: string, date: string },
+  date: Date
 }
 
 export const ListItemDom = (props: Props) => {
-  console.log(props.item);
   return (
     <div className={styles.wrapper}>
       <div className={styles.leftSide}>
@@ -19,7 +19,7 @@ export const ListItemDom = (props: Props) => {
           Автор: {props.item.userName}
         </div>
         <div className={styles.date}>
-          Дата создания: {props.item.date}
+          Дата создания: {props.date.toLocaleDateString()}
         </div>
       </div>
     </div>
