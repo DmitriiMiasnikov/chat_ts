@@ -24,6 +24,10 @@ export const chatApi = {
     const res = await instance.post(`chats/create/?chatTitle=${chatTitle}&userId=${userId}`);
     return res;
   },
+  async remove(id) {
+    const res = await instance.post(`chats/remove/?chatId=${id}`);
+    return res;
+  },
   async getList(page) {
     const res = await instance.get(`chats/list/${page}`)
     return res;

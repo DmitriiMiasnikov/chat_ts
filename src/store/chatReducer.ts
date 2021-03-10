@@ -60,3 +60,10 @@ export const createNewChat = (chatTitle: string, userId: string) => {
     dispatch(setCurrentChat(res.data.chat))
   }
 }
+
+export const removeChat = (id: string) => {
+  return async (dispatch: any) => {
+    const res = await chatApi.remove(id);
+    // dispatch(setCurrentChat(res.data.chat))
+  }
+}

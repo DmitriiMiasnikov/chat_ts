@@ -4,55 +4,85 @@
   box-sizing: border-box;
   border-radius: 8px;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 5px 15px;
   margin: 10px 10px 0px 10px;
-  &:last-child {
-    margin-bottom: 10px;
-  }
-  .leftSide {
+  .mainBlock {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    .title {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    &:last-child {
+      margin-bottom: 10px;
     }
-  }
-  .rightSide {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    .userInfo {
+    .leftSide {
       display: flex;
-      flex-direction: column;
-      .userName,
-      .date {
+      flex-direction: row;
+      justify-content: space-between;
+      .title {
         display: flex;
-        justify-content: flex-end;
-        &.userName {
-          font-size: 15px;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .rightSide {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      .userInfo {
+        display: flex;
+        flex-direction: column;
+        .userName,
+        .date {
+          display: flex;
+          justify-content: flex-end;
+          &.userName {
+            font-size: 15px;
+          }
+          &.date {
+            font-size: 13px;
+          }
         }
-        &.date {
-          font-size: 13px;
+      }
+      .editButton {
+        width: 30px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 10px;
+        &:hover {
+          cursor: pointer;
+        }
+        img {
+          width: 30px;
+          height: 30px;
         }
       }
     }
-    .editButton {
-      width: 30px;
+  }
+  .editBlock {
+    overflow: hidden;
+    width: 100%;
+    height: 0px;
+    transition: .3s height;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &.show {
       height: 40px;
+    }
+    .removeChatButton {
+      width: 80px;
+      height: 30px;
+      border-radius: 4px;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-left: 10px;
+      background-color: rgb(177, 63, 63);
+      transition: .2s background-color;
       &:hover {
         cursor: pointer;
-      }
-      img {
-        width: 30px;
-        height: 30px;
+        background-color: rgb(153, 58, 58);
       }
     }
   }
