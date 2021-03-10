@@ -3,12 +3,14 @@ import styles from './Chats.module.scss';
 import { Form, Field } from 'react-final-form';
 import classnames from 'classnames';
 import ListItem from './ListItem/ListItem';
+import fetching from './../../assets/images/fetching.svg';
 
 type Props = {
   chats: any,
   currentUser: { email: string, userName: string, _id: string },
   inputsCreateChat: { name: string, text: string }[],
-  createNewChatHandler: any
+  createNewChatHandler: any,
+  fetching: boolean
 }
 
 export const ChatsDom = (props: Props) => {
@@ -42,11 +44,12 @@ export const ChatsDom = (props: Props) => {
           )}
         />
       </div>}
-      {Boolean(props.chats.length) && <div className={styles.list}>
+      {Boolean(props.chats.length) && !props.fetching && <div className={styles.list}>
         {props.chats.map((el: any, i: number) => {
           return <ListItem item={el} key={i} />
         })}
       </div>}
+      {props.fetching && <div className={styles.fetching}><img src={fetching} alt='' /></div>}
     </div>
   )
 }

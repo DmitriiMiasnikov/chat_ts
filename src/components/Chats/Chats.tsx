@@ -1,32 +1,36 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { ChatsDom } from './ChatsDom';
-import { createNewChat, getList } from './../../store/chatReducer';
+import { createNewChat, getList, clearList } from './../../store/chatReducer';
 
 type Props = {
   chats: any,
   currentUser: { email: string, userName: string, _id: string },
   createNewChat: (chatTitle: string, userId: string) => void,
   inputsCreateChat: { name: string, text: string }[],
-  getList: (page: number) => void
+  getList: (page: number) => void,
+  clearList: () => void
 }
 
 const Chats = (props: Props) => {
-
+  const [fetching, setFetching] = useState(false);
   useEffect(() => {
-
+    setFetching(true);
     const fetchData = async () => {
-      await props.getList(1)
+      await props.getList(1);
+      setFetching(false);
     }
     fetchData()
   }, [])
-
+  useEffect(() => {
+    return () => props.clearList()
+  }, [])
   const createNewChatHandler = (data: any) => {
     props.createNewChat(data.chatTitle, props.currentUser['_id']);
   }
 
   return (
-    <ChatsDom {...props} createNewChatHandler={createNewChatHandler}/>
+    <ChatsDom {...props} createNewChatHandler={createNewChatHandler} fetching={fetching} />
   )
 }
 
@@ -37,4 +41,4 @@ const mapStatesToProps = (state: any) => {
     inputsCreateChat: state.chat.inputsCreateChat
   }
 }
-export default connect(mapStatesToProps, { createNewChat, getList })(Chats)
+export default connect(mapStatesToProps, { createNewChat, getList, clearList })(Chats)

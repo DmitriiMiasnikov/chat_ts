@@ -2,6 +2,7 @@ import { chatApi } from "../api/api";
 
 const GET_LIST = 'GET_LIST';
 const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT';
+const CLEAR_LIST = 'CLEAR_LIST';
 
 const initialState = {
   chats: [],
@@ -19,6 +20,9 @@ export const chatReducer = (state = initialState, action: any) => {
     case (SET_CURRENT_CHAT): {
       return { ...state, currentChat: action.chat }
     }
+    case (CLEAR_LIST): {
+      return { ...state, chats: [] }
+    }
     default: break;
   }
   return state
@@ -30,6 +34,10 @@ const getListFunc = (chats: any) => {
 
 const setCurrentChat = (chat: any) => {
   return { type: SET_CURRENT_CHAT, chat }
+}
+
+export const clearList = () => {
+  return { type: CLEAR_LIST }
 }
 
 export const getList = (page = 1) => {
