@@ -4,6 +4,7 @@ const GET_LIST = 'GET_LIST';
 const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT';
 const CLEAR_LIST = 'CLEAR_LIST';
 const REMOVE_CHAT = 'REMOVE_CHAT';
+const RENAME_CHAT = 'RENAME_CHAT';
 
 const initialState = {
   chats: [],
@@ -22,7 +23,17 @@ export const chatReducer = (state = initialState, action: any) => {
       return { ...state, currentChat: action.chat }
     }
     case (REMOVE_CHAT): {
-      return { ...state, chats: state.chats.splice(state.chats.findIndex((el: any) => el.id === action.id), 1) }
+      const chats = [...state.chats];
+      chats.splice(state.chats.findIndex((el: any) => el.id === action.id), 1);
+      return { ...state, chats: chats }
+    }
+    case (RENAME_CHAT): {
+      const chats = [...state.chats];
+      chats.map((el: any) => {
+        if (el.id === action.id) el.title = action.newTitle
+        return el
+      })
+      return { ...state, chats: chats }
     }
     case (CLEAR_LIST): {
       return { ...state, chats: [] }
@@ -42,6 +53,10 @@ const setCurrentChat = (chat: any) => {
 
 const removeChatFunc = (id: string) => {
   return { type: REMOVE_CHAT, id }
+}
+
+const renameChatFunc = (id: string, newTitle: string) => {
+  return { type: RENAME_CHAT, id, newTitle }
 }
 
 export const clearList = () => {
@@ -73,5 +88,12 @@ export const removeChat = (id: string) => {
   return async (dispatch: any) => {
     await chatApi.remove(id);
     dispatch(removeChatFunc(id))
+  }
+}
+
+export const renameChat = (id: string, newTitle: string) => {
+  return async (dispatch: any) => {
+    await chatApi.rename(id, newTitle);
+    dispatch(renameChatFunc(id, newTitle))
   }
 }

@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { ListItemDom } from './ListItemDom';
-import { removeChat } from './../../../store/chatReducer';
+import { removeChat, renameChat } from './../../../store/chatReducer';
 
 type Props = {
   item: any,
-  removeChat: (id: string) => void
+  removeChat: (id: string) => void,
+  renameChat: (id: string, title: string) => void
 }
 
 const ListItem = (props: Props) => {
   let date = new Date(props.item.date);
   const [showEditBlock, setShowEditBlock] = useState(false);
-  
+  const inputsRenameChat = [{name: 'chatTitle', text: 'Введите новое название'}]
   const showEditBlockHandler = () => {
     setShowEditBlock(showEditBlock => !showEditBlock);
   }
@@ -19,10 +20,15 @@ const ListItem = (props: Props) => {
   const removeChatHandler = (id: string) => {
     props.removeChat(id);
   }
-
+  const renameChatHandler = (data: any) => {
+    const fetchData = async () => {
+      await props.renameChat(props.item.id, data.chatTitle);
+    }
+    fetchData()
+  }
   return (
     <ListItemDom {...props} date={date} removeChatHandler={removeChatHandler} showEditBlock={showEditBlock}
-    showEditBlockHandler={showEditBlockHandler} />
+    showEditBlockHandler={showEditBlockHandler} renameChatHandler={renameChatHandler} inputsRenameChat={inputsRenameChat} />
   )
 }
 
@@ -32,4 +38,4 @@ const mapStatesToProps = (state: any) => {
   }
 }
 
-export default connect(mapStatesToProps, { removeChat })(ListItem)
+export default connect(mapStatesToProps, { removeChat, renameChat })(ListItem)
