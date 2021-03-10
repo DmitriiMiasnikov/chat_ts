@@ -14,6 +14,7 @@ type Props = {
 
 const Chats = (props: Props) => {
   const [fetching, setFetching] = useState(false);
+
   useEffect(() => {
     setFetching(true);
     const fetchData = async () => {
@@ -22,11 +23,20 @@ const Chats = (props: Props) => {
     }
     fetchData()
   }, [])
+
   useEffect(() => {
     return () => props.clearList()
   }, [])
+
   const createNewChatHandler = (data: any) => {
-    props.createNewChat(data.chatTitle, props.currentUser['_id']);
+    setFetching(true);
+    const fetchData = async () => {
+      await props.createNewChat(data.chatTitle, props.currentUser['_id']);
+      await props.clearList()
+      await props.getList(1);
+      setFetching(false);
+    }
+    fetchData()
   }
 
   return (

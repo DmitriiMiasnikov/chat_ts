@@ -23,17 +23,36 @@
   }
   .rightSide {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
-    .userName,
-    .date {
+    .userInfo {
       display: flex;
-      justify-content: flex-end;
-      &.userName {
-        font-size: 15px;
+      flex-direction: column;
+      .userName,
+      .date {
+        display: flex;
+        justify-content: flex-end;
+        &.userName {
+          font-size: 15px;
+        }
+        &.date {
+          font-size: 13px;
+        }
       }
-      &.date {
-        font-size: 13px;
+    }
+    .editButton {
+      width: 30px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-left: 10px;
+      &:hover {
+        cursor: pointer;
+      }
+      img {
+        width: 30px;
+        height: 30px;
       }
     }
   }
