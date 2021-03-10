@@ -25,7 +25,11 @@ export const chatApi = {
     return res;
   },
   async remove(id) {
-    const res = await instance.post(`chats/remove/?chatId=${id}`);
+    const res = await instance.delete(`chats/${id}`);
+    return res;
+  },
+  async rename(id, newTitle) {
+    const res = await instance.put(`chats/rename/${id}?newTitle=${newTitle}`);
     return res;
   },
   async getList(page) {
