@@ -41,3 +41,18 @@ export const chatApi = {
     return res;
   }
 }
+
+export const messageApi = {
+  async getList(page) {
+    const res = await instance.get(`messages/list/${page}`)
+    return res;
+  },
+  async post(text, userId, chatId) {
+    const res = await instance.post(`messages/?text=${text}&userId=${userId}&chatId=${chatId}`);
+    return res;
+  },
+  async delete(id) {
+    const res = await instance.delete(`messages/${id}`);
+    return res;
+  },
+}
