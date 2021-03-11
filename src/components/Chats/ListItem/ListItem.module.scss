@@ -7,6 +7,11 @@
   flex-direction: column;
   padding: 5px 15px;
   margin: 10px 10px 0px 10px;
+  transition: .2s border-color;
+  border: 1px solid #6e6e6e;
+  &:hover {
+    border-color: #b7b7b7;
+  }
   .mainBlock {
     display: flex;
     flex-direction: row;
@@ -17,7 +22,10 @@
     .leftSide {
       display: flex;
       flex-direction: row;
+      width: 75%;
       justify-content: space-between;
+      text-decoration: none;
+      color: rgb(32, 32, 32);
       .title {
         display: flex;
         justify-content: center;
@@ -27,7 +35,8 @@
     .rightSide {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      width: 24%;
+      justify-content: flex-end;
       .userInfo {
         display: flex;
         flex-direction: column;
@@ -121,7 +130,7 @@
             background-color: var(--grey-2);
             border-radius: 4px;
             border: 0px;
-            transition: .2s background-color;
+            transition: .2s background-color, .2s color;
             color: rgb(0, 0, 0);
             font-size: 17px;
             &:hover {
@@ -135,6 +144,11 @@
             &.submit {
               width: 100%;
               height: 100%;
+            }
+            &.disabled {
+              pointer-events: none;
+              color: #757575;
+              background-color: #5d5d5d;
             }
           }
         }

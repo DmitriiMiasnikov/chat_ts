@@ -23,6 +23,7 @@ const ListItem = (props: Props) => {
   const renameChatHandler = (data: any) => {
     const fetchData = async () => {
       await props.renameChat(props.item.id, data.chatTitle);
+      setShowEditBlock(false);
     }
     fetchData()
   }

@@ -8,6 +8,7 @@ import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Registration from './components/Registration/Registration';
 import Users from './components/Users/Users';
+import Chat from './components/Chat/Chat';
 
 type Props = {
   showAuthorization: boolean,
@@ -24,6 +25,7 @@ const App = (props: Props) => {
           <Redirect exact from={'/'} to={'/main'} />
           <Route path={'/main'} render={() => <Main />} />
           <Route path={'/chats'} render={() => <Chats />} />
+          <Route path={'/chat/:id'} render={() => <Chat />} />
           <Route path={'/users'} render={() => <Users />} />
         </Switch>
       </div>

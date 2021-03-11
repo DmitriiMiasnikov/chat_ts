@@ -19,7 +19,7 @@ export const ChatsDom = (props: Props) => {
       {props.currentUser && <div className={styles.createNewChat}>
         <Form
           onSubmit={props.createNewChatHandler}
-          render={({ handleSubmit, form, submitting }) => (
+          render={({ handleSubmit, pristine }) => (
             <form onSubmit={handleSubmit}>
               {
                 props.inputsCreateChat.map((el, i) => {
@@ -38,7 +38,8 @@ export const ChatsDom = (props: Props) => {
                 })
               }
               <div className={classnames(styles.buttons)}>
-                <button type='submit' disabled={submitting} className={styles.submit}>Создать</button>
+                <button type='submit' className={classnames(styles.submit, { [styles.disabled]: pristine })}>
+                  Создать</button>
               </div>
             </form>
           )}
