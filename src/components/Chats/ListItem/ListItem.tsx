@@ -13,8 +13,8 @@ const ListItem = (props: Props) => {
   let date = new Date(props.item.date);
   const [showEditBlock, setShowEditBlock] = useState(false);
   const inputsRenameChat = [{name: 'chatTitle', text: 'Введите новое название'}]
-  const showEditBlockHandler = () => {
-    setShowEditBlock(showEditBlock => !showEditBlock);
+  const showEditBlockHandler = (show: boolean) => {
+    setShowEditBlock(show);
   }
 
   const removeChatHandler = (id: string) => {

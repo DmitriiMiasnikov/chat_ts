@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './ListItem.module.scss';
 import edit from './../../../assets/images/edit.svg';
 import classnames from 'classnames';
@@ -9,14 +9,38 @@ type Props = {
   date: Date,
   removeChatHandler: (id: string) => void,
   showEditBlock: boolean,
-  showEditBlockHandler: () => void,
+  showEditBlockHandler: (show: boolean) => void,
   renameChatHandler: any,
   inputsRenameChat: { name: string, text: string }[],
 }
 
 export const ListItemDom = (props: Props) => {
+  const refListItem = useRef(null);
+  const handleMouseClick = (e: any) => {
+    function composedPath(el: any) {
+      const path = [];
+      while (el) {
+        path.push(el);
+        if (el.tagName === 'HTML') {
+          path.push(document);
+          path.push(window);
+          return path;
+        }
+        el = el.parentElement;
+      }
+    }
+    const path = e.path || (e.composedPath && e.composedPath()) || composedPath(e.target);
+    if (!path.includes(refListItem.current)) {
+      props.showEditBlockHandler(false);
+    }
+  }
+  useEffect(() => {
+    document.addEventListener('click', handleMouseClick, true)
+    return () => document.removeEventListener('click', handleMouseClick, true)
+  })
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={refListItem}>
       <div className={styles.mainBlock}>
         <div className={styles.leftSide}>
           <div className={styles.title}>
@@ -32,7 +56,7 @@ export const ListItemDom = (props: Props) => {
               Дата создания: {props.date.toLocaleDateString()}
             </div>
           </div>
-          <div className={styles.editButton} onClick={() => props.showEditBlockHandler()}>
+          <div className={styles.editButton} onClick={() => props.showEditBlockHandler(!props.showEditBlock)}>
             <img src={edit} alt='' />
           </div>
         </div>
