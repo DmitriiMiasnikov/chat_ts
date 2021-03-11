@@ -43,8 +43,8 @@ export const chatApi = {
 }
 
 export const messageApi = {
-  async getList(page) {
-    const res = await instance.get(`messages/list/${page}`)
+  async getList(page, chatId) {
+    const res = await instance.get(`messages/list/${page}?chatId=${chatId}`)
     return res;
   },
   async post(text, userId, chatId) {
