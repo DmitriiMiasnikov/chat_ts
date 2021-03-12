@@ -25,7 +25,7 @@ const App = (props: Props) => {
           <Redirect exact from={'/'} to={'/main'} />
           <Route path={'/main'} render={() => <Main />} />
           <Route path={'/chats'} render={() => <Chats />} />
-          <Route path={'/chat/:id'} render={() => <Chat />} />
+          <Route path={'/chat/:chatId'} render={() => <Chat />} />
           <Route path={'/users'} render={() => <Users />} />
         </Switch>
       </div>

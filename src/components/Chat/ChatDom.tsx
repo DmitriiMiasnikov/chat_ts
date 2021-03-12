@@ -15,7 +15,7 @@ export const ChatDom = (props: Props) => {
       <div className={styles.messages}>
         {props.messages.map((el: any, i: number) => {
           return (
-            <div>{el.text}</div>  
+            <div className={styles.message} key={i}>{el.text}</div>  
           )
         })}
       </div>

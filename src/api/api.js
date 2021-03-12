@@ -55,4 +55,8 @@ export const messageApi = {
     const res = await instance.delete(`messages/${id}`);
     return res;
   },
+  async edit(text, id) {
+    const res = await instance.put(`messages/${id}?text=${text}`);
+    return res;
+  },
 }

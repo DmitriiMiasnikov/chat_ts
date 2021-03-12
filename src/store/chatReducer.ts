@@ -5,12 +5,13 @@ const SET_CURRENT_CHAT = 'SET_CURRENT_CHAT';
 const CLEAR_LIST = 'CLEAR_LIST';
 const REMOVE_CHAT = 'REMOVE_CHAT';
 const RENAME_CHAT = 'RENAME_CHAT';
+const CREATE_CHAT = 'CREATE_CHAT';
 
 const initialState = {
   chats: [],
   currentChat: null,
   inputsCreateChat: [
-    {name: 'chatTitle', text: 'Введите название нового чата'},
+    { name: 'chatTitle', text: 'Введите название нового чата' },
   ]
 }
 
@@ -21,6 +22,9 @@ export const chatReducer = (state = initialState, action: any) => {
     }
     case (SET_CURRENT_CHAT): {
       return { ...state, currentChat: action.chat }
+    }
+    case (CREATE_CHAT): {
+      return { ...state, chats: [action.chat, ...state.chats] }
     }
     case (REMOVE_CHAT): {
       const chats = [...state.chats];
@@ -59,6 +63,10 @@ const renameChatFunc = (id: string, newTitle: string) => {
   return { type: RENAME_CHAT, id, newTitle }
 }
 
+const createChatFunc = (chat: string) => {
+  return { type: CREATE_CHAT, chat }
+}
+
 export const clearList = () => {
   return { type: CLEAR_LIST }
 }
@@ -80,7 +88,8 @@ export const getChat = (chatId: string) => {
 export const createNewChat = (chatTitle: string, userId: string) => {
   return async (dispatch: any) => {
     const res = await chatApi.createNew(chatTitle, userId);
-    dispatch(setCurrentChat(res.data.chat))
+    dispatch(createChatFunc(res.data.chat));
+    // dispatch(setCurrentChat(res.data.chat));
   }
 }
 

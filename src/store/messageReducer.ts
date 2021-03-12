@@ -3,6 +3,8 @@ import { messageApi } from "../api/api";
 const GET_MESSAGES = 'GET_MESSAGES';
 const DELETE_MESSAGE = 'DELETE_MESSAGE';
 const CREATE_MESSAGE = 'CREATE_MESSAGE';
+const EDIT_MESSAGE = 'EDIT_MESSAGE';
+const CLEAR_LIST_MESSAGES = 'CLEAR_LIST_MESSAGES';
 
 const initialState = {
   messages: [],
@@ -14,12 +16,23 @@ export const messageReducer = (state = initialState, action: any) => {
     case (GET_MESSAGES): {
       return { ...state, messages: [...state.messages, ...action.messages] }
     }
+    case (CLEAR_LIST_MESSAGES): {
+      return { ...state, messages: [] }
+    }
     case (CREATE_MESSAGE): {
       return { ...state, messages: [...state.messages, action.message] }
     }
     case (DELETE_MESSAGE): {
       const messages = [...state.messages];
       messages.splice(state.messages.findIndex((el: any) => el.id === action.id), 1);
+      return { ...state, messages: messages }
+    }
+    case (EDIT_MESSAGE): {
+      const messages = [...state.messages];
+      messages.map((el: any) => {
+        if (el.id === action.id) el.text = action.text
+        return el
+      })
       return { ...state, messages: messages }
     }
     default: break;
@@ -37,6 +50,13 @@ const createMessageFunc = (message: string) => {
 
 const deleteMessageFunc = (id: string) => {
   return { type: DELETE_MESSAGE, id }
+}
+const editMessageFunc = (id: string, text: string) => {
+  return { type: EDIT_MESSAGE, id, text }
+}
+
+export const clearListMessages = () => {
+  return { type: CLEAR_LIST_MESSAGES }
 }
 
 export const getMessages = (page: number, chatId: string) => {
@@ -57,5 +77,12 @@ export const deleteMessage = (id: string) => {
   return async (dispatch: any) => {
     await messageApi.delete(id);
     dispatch(deleteMessageFunc(id))
+  }
+}
+
+export const editMessage = (id: string, text: string) => {
+  return async (dispatch: any) => {
+    await messageApi.edit(id, text);
+    dispatch(editMessageFunc(id, text))
   }
 }
