@@ -1,10 +1,17 @@
 .app {
+  position: relative;
   background-color: rgb(44, 44, 44);
   width: 1000px;
-  min-height: 800px;
   margin: 4px auto;
   border-radius: 8px;
   box-sizing: border-box;
   overflow: hidden;
   user-select: none;
+  .header {
+    position: relative;
+  }
+  .content {
+    position: relative;
+    min-height: 800px;
+  }
 }
