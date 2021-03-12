@@ -5,14 +5,19 @@ import classnames from 'classnames';
 
 type Props = {
   match: any,
-  newMessageHandler: any
+  newMessageHandler: any,
+  messages: any
 }
 
 export const ChatDom = (props: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.messages}>
-        {props.match.params.id}
+        {props.messages.map((el: any, i: number) => {
+          return (
+            <div>{el.text}</div>  
+          )
+        })}
       </div>
       <div className={styles.createMessage}>
         <Form

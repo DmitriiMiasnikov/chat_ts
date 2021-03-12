@@ -5,7 +5,8 @@ const DELETE_MESSAGE = 'DELETE_MESSAGE';
 const CREATE_MESSAGE = 'CREATE_MESSAGE';
 
 const initialState = {
-  messages: []
+  messages: [],
+  pageMessages: 1
 }
 
 export const messageReducer = (state = initialState, action: any) => {
