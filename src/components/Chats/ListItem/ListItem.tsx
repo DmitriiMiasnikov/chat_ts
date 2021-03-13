@@ -19,6 +19,7 @@ const ListItem = (props: Props) => {
 
   const removeChatHandler = (id: string) => {
     props.removeChat(id);
+    setShowEditBlock(false);
   }
   const renameChatHandler = (data: any) => {
     const fetchData = async () => {

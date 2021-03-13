@@ -32,6 +32,8 @@ const Chats = (props: Props) => {
     setFetching(true);
     const fetchData = async () => {
       await props.createNewChat(data.chatTitle, props.currentUser['_id']);
+      props.clearList();
+      props.getList(1);
       setFetching(false);
     }
     fetchData()
