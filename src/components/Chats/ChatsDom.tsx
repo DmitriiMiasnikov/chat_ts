@@ -19,8 +19,11 @@ export const ChatsDom = (props: Props) => {
       {props.currentUser && <div className={styles.createNewChat}>
         <Form
           onSubmit={props.createNewChatHandler}
-          render={({ handleSubmit, pristine }) => (
-            <form onSubmit={handleSubmit}>
+          render={({ handleSubmit, pristine, form }) => (
+            <form onSubmit={async (event) => {
+              await handleSubmit(event);
+              await form.reset();
+            }}>
               {
                 props.inputsCreateChat.map((el, i) => {
                   return (

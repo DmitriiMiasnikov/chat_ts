@@ -71,8 +71,11 @@ export const ListItemDom = (props: Props) => {
         <div className={styles.renameChat}>
           <Form
             onSubmit={props.renameChatHandler}
-            render={({ handleSubmit, pristine }) => (
-              <form onSubmit={handleSubmit}>
+            render={({ handleSubmit, pristine, form }) => (
+              <form onSubmit={async (event) => {
+                await handleSubmit(event);
+                await form.reset();
+              }}>
                 {
                   props.inputsRenameChat.map((el, i) => {
                     return (

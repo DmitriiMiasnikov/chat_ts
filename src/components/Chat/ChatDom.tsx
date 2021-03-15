@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './Chat.module.scss';
 import { Form, Field } from 'react-final-form';
 import classnames from 'classnames';
@@ -12,9 +12,15 @@ type Props = {
 }
 
 export const ChatDom = (props: Props) => {
+  const messagesRef = useRef(null);
+
+  // useEffect(() => {
+  //   messagesRef.scrollTo(0, messagesRef.current.scrollHeight);
+  // })
+
   return (
     <div className={styles.wrapper}>
-      <div className={styles.messages}>
+      <div className={styles.messages} ref={messagesRef}>
         {props.messages.map((el: any, i: number) => {
           return (
             <div className={styles.message} key={i}>
@@ -36,8 +42,9 @@ export const ChatDom = (props: Props) => {
           onSubmit={props.newMessageHandler}
           render={({ handleSubmit, pristine, form }) => (
             <form
-              onSubmit={(event) => {
-                handleSubmit(event)?.then(form.reset);
+              onSubmit={async (event) => {
+                await handleSubmit(event);
+                await form.reset();
               }}
             >
               <div className={styles.inputBlock}>
