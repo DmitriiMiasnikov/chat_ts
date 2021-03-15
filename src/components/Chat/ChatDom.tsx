@@ -39,7 +39,7 @@ export const ChatDom = (props: Props) => {
                 <Field name={'message'}>
                   {({ input, meta }) => (
                     <div>
-                      <input {...input} type={'text'} placeholder={'Отправить сообщение'} />
+                      <input {...input} type={'text'} placeholder={'Отправить сообщение'} autoComplete={'off'} />
                       {meta.error && meta.touched && <div className={styles.error}>{meta.error}</div>}
                     </div>
                   )}

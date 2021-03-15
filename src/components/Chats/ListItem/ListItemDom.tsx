@@ -78,7 +78,7 @@ export const ListItemDom = (props: Props) => {
                         <Field name={el.name}>
                           {({ input, meta }) => (
                             <div>
-                              <input {...input} type={'text'} placeholder={el.text} />
+                              <input {...input} type={'text'} placeholder={el.text} autoComplete={'off'} />
                               {meta.error && meta.touched && <div className={styles.error}>{meta.error}</div>}
                             </div>
                           )}
