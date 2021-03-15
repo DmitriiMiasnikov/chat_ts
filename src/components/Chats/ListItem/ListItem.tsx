@@ -6,17 +6,19 @@ import { removeChat, renameChat } from './../../../store/chatReducer';
 type Props = {
   item: any,
   removeChat: (id: string) => void,
-  renameChat: (id: string, title: string) => void
+  renameChat: (id: string, title: string) => void,
+  isAuth: boolean,
+  currentUser: any
 }
 
 const ListItem = (props: Props) => {
   let date = new Date(props.item.date);
   const [showEditBlock, setShowEditBlock] = useState(false);
+  const isMyChat = (props.currentUser && props.currentUser._id === props.item.userId) || false;
   const inputsRenameChat = [{name: 'chatTitle', text: 'Введите новое название'}]
   const showEditBlockHandler = (show: boolean) => {
     setShowEditBlock(show);
   }
-
   const removeChatHandler = (id: string) => {
     props.removeChat(id);
     setShowEditBlock(false);
@@ -30,13 +32,15 @@ const ListItem = (props: Props) => {
   }
   return (
     <ListItemDom {...props} date={date} removeChatHandler={removeChatHandler} showEditBlock={showEditBlock}
-    showEditBlockHandler={showEditBlockHandler} renameChatHandler={renameChatHandler} inputsRenameChat={inputsRenameChat} />
+    showEditBlockHandler={showEditBlockHandler} renameChatHandler={renameChatHandler} inputsRenameChat={inputsRenameChat} 
+    isMyChat={isMyChat} />
   )
 }
 
 const mapStatesToProps = (state: any) => {
   return {
-
+    isAuth: state.auth.isAuth,
+    currentUser: state.auth.currentUser
   }
 }
 

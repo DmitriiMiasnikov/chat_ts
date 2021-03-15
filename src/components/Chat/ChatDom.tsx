@@ -7,7 +7,8 @@ import avatar from './../../assets/images/avatar.svg'
 type Props = {
   match: any,
   newMessageHandler: any,
-  messages: any
+  messages: any,
+  currentUser: { email: string, userName: string, _id: string },
 }
 
 export const ChatDom = (props: Props) => {
@@ -18,7 +19,7 @@ export const ChatDom = (props: Props) => {
           return (
             <div className={styles.message} key={i}>
               <div className={styles.user}>
-                <img src={avatar} />
+                <img src={avatar} alt='' />
                 <div className={styles.userName}>
                   {el.userName}
                 </div>
@@ -30,11 +31,15 @@ export const ChatDom = (props: Props) => {
           )
         })}
       </div>
-      <div className={styles.createMessage}>
+      {props.currentUser && <div className={styles.createMessage}>
         <Form
           onSubmit={props.newMessageHandler}
-          render={({ handleSubmit, pristine }) => (
-            <form onSubmit={handleSubmit}>
+          render={({ handleSubmit, pristine, form }) => (
+            <form
+              onSubmit={(event) => {
+                handleSubmit(event)?.then(form.reset);
+              }}
+            >
               <div className={styles.inputBlock}>
                 <Field name={'message'}>
                   {({ input, meta }) => (
@@ -52,7 +57,7 @@ export const ChatDom = (props: Props) => {
             </form>
           )}
         />
-      </div>
+      </div>}
     </div>
   )
 }

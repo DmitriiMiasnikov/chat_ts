@@ -13,6 +13,8 @@ type Props = {
   showEditBlockHandler: (show: boolean) => void,
   renameChatHandler: any,
   inputsRenameChat: { name: string, text: string }[],
+  isAuth: boolean,
+  isMyChat: boolean
 }
 
 export const ListItemDom = (props: Props) => {
@@ -57,12 +59,12 @@ export const ListItemDom = (props: Props) => {
               Дата создания: {props.date.toLocaleDateString()}
             </div>
           </div>
-          <div className={styles.editButton} onClick={(e) => {
+          {props.isAuth && props.isMyChat && <div className={classnames(styles.editButton)} onClick={(e) => {
             e.preventDefault();
             props.showEditBlockHandler(!props.showEditBlock)
           }}>
             <img src={edit} alt='' />
-          </div>
+          </div>}
         </div>
       </div>
       <div className={classnames(styles.editBlock, { [styles.show]: props.showEditBlock })}>

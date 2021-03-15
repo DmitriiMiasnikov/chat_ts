@@ -20,7 +20,7 @@ const Chat = (props: Props) => {
   const newMessageHandler = (data: any) => {
     setFetching(true);
     const fetchData = async () => {
-      await props.createMessage(data.message, props.currentUser ? props.currentUser['_id'] : 'anonim', props.match.params.chatId);
+      await props.createMessage(data.message, props.currentUser['_id'], props.match.params.chatId);
       setFetching(false);
     }
     fetchData()
@@ -40,7 +40,7 @@ const Chat = (props: Props) => {
   }, [])
 
   return (
-    <ChatDom {...props} newMessageHandler={newMessageHandler}/>
+    <ChatDom {...props} newMessageHandler={newMessageHandler} />
   )
 }
 
