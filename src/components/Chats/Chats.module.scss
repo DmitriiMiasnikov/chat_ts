@@ -1,5 +1,6 @@
 .wrapper {
   position: relative;
+  height: inherit;
   .createNewChat {
     background-color: rgb(63, 63, 63);
     margin: 10px 10px 0 10px;
@@ -79,6 +80,7 @@
   .list {
     display: flex;
     flex-direction: column;
+    overflow: auto;
   }
   .fetching {
     display: flex;

@@ -13,27 +13,27 @@ type Props = {
 }
 
 const Chats = (props: Props) => {
+  const [getList, clearList] = [props.getList, props.clearList];
   const [fetching, setFetching] = useState(false);
-
   useEffect(() => {
     setFetching(true);
     const fetchData = async () => {
-      await props.getList(1);
+      await getList(1);
       setFetching(false);
     }
     fetchData()
-  }, [])
+  }, [getList])
 
   useEffect(() => {
-    return () => props.clearList()
-  }, [])
+    return () => clearList()
+  }, [clearList])
 
   const createNewChatHandler = (data: any) => {
     setFetching(true);
     const fetchData = async () => {
       await props.createNewChat(data.chatTitle, props.currentUser['_id']);
-      props.clearList();
-      props.getList(1);
+      clearList();
+      getList(1);
       setFetching(false);
     }
     fetchData()

@@ -15,8 +15,9 @@ type Props = {
 }
 
 const Chat = (props: Props) => {
+  const [getMessages, pageMessages, match, clearListMessages] =
+    [props.getMessages, props.pageMessages, props.match, props.clearListMessages]
   const [fetching, setFetching] = useState(false);
-
   const newMessageHandler = (data: any) => {
     setFetching(true);
     const fetchData = async () => {
@@ -29,15 +30,15 @@ const Chat = (props: Props) => {
   useEffect(() => {
     setFetching(true);
     const fetchData = async () => {
-      await props.getMessages(props.pageMessages, props.match.params.chatId);
+      await getMessages(pageMessages, match.params.chatId);
       setFetching(false);
     }
     fetchData()
-  }, [props.getMessages, props.pageMessages, props.match.params.chatId])
+  }, [getMessages, pageMessages, match.params.chatId])
 
   useEffect(() => {
-    return () => props.clearListMessages()
-  }, [])
+    return () => clearListMessages()
+  }, [clearListMessages])
 
   return (
     <ChatDom {...props} newMessageHandler={newMessageHandler} />
