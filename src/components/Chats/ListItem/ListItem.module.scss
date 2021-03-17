@@ -23,7 +23,7 @@
     .leftSide {
       display: flex;
       flex-direction: row;
-      width: 75%;
+      width: 100%;
       justify-content: space-between;
       text-decoration: none;
       color: #c7c7c7;
@@ -36,21 +36,23 @@
     .rightSide {
       display: flex;
       flex-direction: row;
-      width: 24%;
+      min-width: fit-content;
       justify-content: flex-end;
       color: #c7c7c7;
       .userInfo {
         display: flex;
         flex-direction: column;
+        justify-content: space-around;
         .userName,
         .date {
           display: flex;
           justify-content: flex-end;
+          text-align: end;
           &.userName {
-            font-size: 15px;
+            font-size: 13px;
           }
           &.date {
-            font-size: 13px;
+            font-size: 12px;
           }
         }
       }

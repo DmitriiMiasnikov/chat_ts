@@ -34,7 +34,9 @@ export const ChatDom = (props: Props) => {
                 </div>
               </div>
               <div className={styles.cloudMessage}>
+                <div className={styles.text}>
                 {el.text}
+                </div>
               </div>
             </div>
           )
@@ -63,7 +65,7 @@ export const ChatDom = (props: Props) => {
               </div>
               <div className={classnames(styles.buttons)}>
                 <button type='submit' className={classnames(styles.submit, { [styles.disabled]: pristine })}>
-                  Создать</button>
+                  Отправить</button>
               </div>
             </form>
           )}

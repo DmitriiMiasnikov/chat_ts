@@ -11,7 +11,7 @@ export const mainSettingsReducer = (state = initialState, action: any) => {
   switch(action.type) {
     case (SET_IS_MOBILE): {
       const isMobile = /Mobile|webOS|BlackBerry|IEMobile|MeeGo|mini|Fennec|Windows Phone|Android|iP(ad|od|hone)/i.test(navigator.userAgent);
-      return { ...state, isMobile: isMobile || action.width < 1100 }
+      return { ...state, isMobile: isMobile || action.width < 1000 }
     }
     case (SET_WINDOW_SIZE): {
       return {...state, windowSize: action.windowSize}

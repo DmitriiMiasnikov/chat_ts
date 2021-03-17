@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router';
 import styles from './App.module.scss';
@@ -21,16 +21,23 @@ type Props = {
 }
 const App = (props: Props) => {
   const [setWindowSize, windowSize, setIsMobile] = [props.setWindowSize, props.windowSize, props.setIsMobile];
+  const [stateWindowSize, setStateWindowSize] = useState({width: 0, height: 0});
   const widthHandler = () => {
+    setStateWindowSize({width: window.innerWidth, height: window.innerHeight })
     setWindowSize({width: window.innerWidth, height: window.innerHeight })
   }
   const subscribeResize = () => window.addEventListener('resize', widthHandler, true);
   const unsubscribeResize = () => window.removeEventListener('resize', widthHandler, true);
 
   useEffect(() => {
-    setWindowSize({width: window.innerWidth, height: window.innerHeight });
-    setIsMobile(window.innerWidth);
-  }, [setWindowSize, setIsMobile])
+    setStateWindowSize({width: window.innerWidth, height: window.innerHeight })
+    setWindowSize({width: window.innerWidth, height: window.innerHeight })
+  }, [setWindowSize])
+
+  useEffect(() => {
+    setWindowSize(stateWindowSize);
+    setIsMobile(stateWindowSize.width);
+  }, [stateWindowSize, setWindowSize, setIsMobile])
 
   useEffect(() => {
     subscribeResize()
@@ -38,7 +45,7 @@ const App = (props: Props) => {
   })
 
   return (
-    <div className={styles.app} style={{ height: windowSize.height - 10 }}>
+    <div className={styles.app} style={{ height: windowSize.height - 10, maxWidth: props.isMobile ? '100%' : 1000 }}>
       <div className={styles.header}>
         <Header />
       </div>
