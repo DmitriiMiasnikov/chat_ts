@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from './Chat.module.scss';
 import { Form, Field } from 'react-final-form';
 import classnames from 'classnames';
@@ -12,15 +12,18 @@ type Props = {
 }
 
 export const ChatDom = (props: Props) => {
-  const messagesRef = useRef(null);
-
-  // useEffect(() => {
-  //   messagesRef.scrollTo(0, messagesRef.current.scrollHeight);
-  // })
+  const [messages] = [props.messages];
+  const refEndList: any = useRef(null);
+  const scrollToBottom = () => {
+    refEndList.current?.scrollIntoView({ behavior: 'auto' });
+  }
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.messages} ref={messagesRef}>
+      <div className={styles.messages}>
         {props.messages.map((el: any, i: number) => {
           return (
             <div className={styles.message} key={i}>
@@ -36,6 +39,7 @@ export const ChatDom = (props: Props) => {
             </div>
           )
         })}
+        <div ref={refEndList} />
       </div>
       {props.currentUser && <div className={styles.createMessage}>
         <Form
