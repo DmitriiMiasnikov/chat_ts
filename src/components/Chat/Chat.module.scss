@@ -7,7 +7,8 @@
 
   .messages {
     padding: 10px;
-    overflow: auto;
+    margin: 5px;
+    overflow-y: scroll;
     .message {
       display: flex;
       flex-direction: row;
@@ -52,6 +53,16 @@
           border-top: 6px solid #b1b1b1;
         }
       }
+    }
+    &::-webkit-scrollbar {
+      width: 15px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb { 
+      border-radius: 8px;
+      background-color: #1d1d1d;
     }
   }
 
