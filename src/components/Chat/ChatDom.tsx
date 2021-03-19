@@ -20,13 +20,14 @@ export const ChatDom = (props: Props) => {
   useEffect(() => {
     scrollToBottom()
   }, [messages])
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.messages}>
         {props.messages.map((el: any, i: number) => {
+          const date = new Date(el.date)
           return (
             <div className={styles.message} key={i}>
+              <div className={styles.leftSide}>
               <div className={styles.user}>
                 <img src={avatar} alt='' />
                 <div className={styles.userName}>
@@ -38,6 +39,12 @@ export const ChatDom = (props: Props) => {
                 {el.text}
                 </div>
               </div>
+              </div>
+              <div className={styles.rightSide}>
+                <div>{date.toLocaleDateString()}</div>
+                <div>{date.toLocaleTimeString()}</div>
+              </div>
+
             </div>
           )
         })}

@@ -86,7 +86,7 @@
       height: 40px;
     }
     .renameChat {
-      width: 85%;
+      width: 100%;
       form {
         display: inline-block;
         width: 100%;
@@ -159,7 +159,8 @@
       }
     }
     .removeChatButton {
-      width: 10%;
+      padding: 0 10px;
+      margin-left: 10px;
       height: 30px;
       border-radius: 4px;
       display: flex;
