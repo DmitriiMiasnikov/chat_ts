@@ -4,6 +4,7 @@ import { Form, Field } from 'react-final-form';
 import classnames from 'classnames';
 import avatarSvg from './../../assets/images/avatar.svg';
 import deleteSvg from './../../assets/images/delete.svg';
+import fetching from './../../assets/images/fetching.svg';
 
 type Props = {
   match: any,
@@ -13,12 +14,14 @@ type Props = {
   deleteMEssageHandler: (id: string) => void,
   getMessages: (page: number, chatId: string) => void,
   refEndList: any,
-  refMessages: any
+  refMessages: any,
+  fetching: boolean
 }
 
 export const ChatDom = (props: Props) => {
   return (
     <div className={styles.wrapper}>
+      {props.fetching && <div className={styles.fetching}><img src={fetching} alt='' /></div>}
       <div className={styles.messages} ref={props.refMessages}>
         {props.messages.map((el: any, i: number) => {
           const date = new Date(el.date)

@@ -89,7 +89,7 @@ const Chat = (props: Props) => {
   
   return (
     <ChatDom {...props} newMessageHandler={newMessageHandler} deleteMEssageHandler={deleteMEssageHandler}
-    refEndList={refEndList} refMessages={refMessages}/>
+    refEndList={refEndList} refMessages={refMessages} fetching={fetching}/>
   )
 }
 

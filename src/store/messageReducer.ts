@@ -24,7 +24,7 @@ export const messageReducer = (state = initialState, action: any) => {
       return { ...state, messages: [...state.messages, action.message] }
     }
     case (SET_PAGE_MESSAGES): {
-      return {...state, pageMessages: action.page}
+      return { ...state, pageMessages: action.page }
     }
     case (DELETE_MESSAGE): {
       const messages = [...state.messages];
