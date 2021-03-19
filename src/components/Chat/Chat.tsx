@@ -45,7 +45,7 @@ const Chat = (props: Props) => {
   const deleteMEssageHandler = (id: string) => {
     deleteMessage(id);
   }
-
+  
   return (
     <ChatDom {...props} newMessageHandler={newMessageHandler} deleteMEssageHandler={deleteMEssageHandler}/>
   )

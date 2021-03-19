@@ -24,7 +24,7 @@ export const messageReducer = (state = initialState, action: any) => {
     }
     case (DELETE_MESSAGE): {
       const messages = [...state.messages];
-      messages.splice(state.messages.findIndex((el: any) => el.id === action.id), 1);
+      messages.splice(state.messages.findIndex((el: any) => el._id === action.id), 1);
       return { ...state, messages: messages }
     }
     case (EDIT_MESSAGE): {
