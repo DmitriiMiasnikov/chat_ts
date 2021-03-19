@@ -5,6 +5,7 @@ const DELETE_MESSAGE = 'DELETE_MESSAGE';
 const CREATE_MESSAGE = 'CREATE_MESSAGE';
 const EDIT_MESSAGE = 'EDIT_MESSAGE';
 const CLEAR_LIST_MESSAGES = 'CLEAR_LIST_MESSAGES';
+const SET_PAGE_MESSAGES = 'SET_PAGE_MESSAGES';
 
 const initialState = {
   messages: [],
@@ -14,13 +15,16 @@ const initialState = {
 export const messageReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case (GET_MESSAGES): {
-      return { ...state, messages: [...state.messages, ...action.messages] }
+      return { ...state, messages: [...action.messages, ...state.messages] }
     }
     case (CLEAR_LIST_MESSAGES): {
-      return { ...state, messages: [] }
+      return { ...initialState }
     }
     case (CREATE_MESSAGE): {
       return { ...state, messages: [...state.messages, action.message] }
+    }
+    case (SET_PAGE_MESSAGES): {
+      return {...state, pageMessages: action.page}
     }
     case (DELETE_MESSAGE): {
       const messages = [...state.messages];
@@ -30,7 +34,7 @@ export const messageReducer = (state = initialState, action: any) => {
     case (EDIT_MESSAGE): {
       const messages = [...state.messages];
       messages.map((el: any) => {
-        if (el.id === action.id) el.text = action.text
+        if (el._id === action.id) el.text = action.text
         return el
       })
       return { ...state, messages: messages }
@@ -57,6 +61,10 @@ const editMessageFunc = (id: string, text: string) => {
 
 export const clearListMessages = () => {
   return { type: CLEAR_LIST_MESSAGES }
+}
+
+export const setPageMessages = (page: number) => {
+  return { type: SET_PAGE_MESSAGES, page }
 }
 
 export const getMessages = (page: number, chatId: string) => {

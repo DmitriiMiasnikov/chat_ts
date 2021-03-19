@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import styles from './Chat.module.scss';
 import { Form, Field } from 'react-final-form';
 import classnames from 'classnames';
@@ -10,21 +10,16 @@ type Props = {
   newMessageHandler: any,
   messages: any,
   currentUser: { email: string, userName: string, _id: string },
-  deleteMEssageHandler: (id: string) => void
+  deleteMEssageHandler: (id: string) => void,
+  getMessages: (page: number, chatId: string) => void,
+  refEndList: any,
+  refMessages: any
 }
 
 export const ChatDom = (props: Props) => {
-  const [messages] = [props.messages];
-  const refEndList: any = useRef(null);
-  const scrollToBottom = () => {
-    refEndList.current?.scrollIntoView({ behavior: 'auto' });
-  }
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages])
   return (
     <div className={styles.wrapper}>
-      <div className={styles.messages}>
+      <div className={styles.messages} ref={props.refMessages}>
         {props.messages.map((el: any, i: number) => {
           const date = new Date(el.date)
           return (
@@ -55,7 +50,7 @@ export const ChatDom = (props: Props) => {
             </div>
           )
         })}
-        <div ref={refEndList} />
+        <div ref={props.refEndList} />
       </div>
       {props.currentUser && <div className={styles.createMessage}>
         <Form
