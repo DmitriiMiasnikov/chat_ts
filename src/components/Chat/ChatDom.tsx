@@ -2,13 +2,15 @@ import React, { useEffect, useRef } from 'react';
 import styles from './Chat.module.scss';
 import { Form, Field } from 'react-final-form';
 import classnames from 'classnames';
-import avatar from './../../assets/images/avatar.svg'
+import avatarSvg from './../../assets/images/avatar.svg';
+import deleteSvg from './../../assets/images/delete.svg';
 
 type Props = {
   match: any,
   newMessageHandler: any,
   messages: any,
   currentUser: { email: string, userName: string, _id: string },
+  deleteMEssageHandler: (id: string) => void
 }
 
 export const ChatDom = (props: Props) => {
@@ -28,21 +30,26 @@ export const ChatDom = (props: Props) => {
           return (
             <div className={styles.message} key={i}>
               <div className={styles.leftSide}>
-              <div className={styles.user}>
-                <img src={avatar} alt='' />
-                <div className={styles.userName}>
-                  {el.userName}
+                <div className={styles.user}>
+                  <img src={avatarSvg} alt='' />
+                  <div className={styles.userName}>
+                    {el.userName}
+                  </div>
                 </div>
-              </div>
-              <div className={styles.cloudMessage}>
-                <div className={styles.text}>
-                {el.text}
+                <div className={styles.cloudMessage}>
+                  <div className={styles.text}>
+                    {el.text}
+                  </div>
                 </div>
-              </div>
               </div>
               <div className={styles.rightSide}>
-                <div>{date.toLocaleDateString()}</div>
-                <div>{date.toLocaleTimeString()}</div>
+                <div className={styles.date}>
+                  <div>{date.toLocaleDateString()}</div>
+                  <div>{date.toLocaleTimeString()}</div>
+                </div>
+                <div className={styles.buttonDeleteMessage}>
+                  <img src={deleteSvg} alt='' onClick={() => props.deleteMEssageHandler(el._id)}/>
+                </div>
               </div>
 
             </div>
