@@ -75,20 +75,10 @@ const Chat = (props: Props) => {
     return () => clearListMessages()
   }, [clearListMessages])
 
-  const newMessageHandler = (data: any) => {
-    setFetching(true);
-    const fetchData = async () => {
-      await props.createMessage(data.message, props.currentUser['_id'], props.match.params.chatId);
-      scrollToBottom();
-      setFetching(false);
-    }
-    fetchData()
-  }
-
 
   return (
-    <ChatDom {...props} newMessageHandler={newMessageHandler}
-      refEndList={refEndList} refMessages={refMessages} fetching={fetching} />
+    <ChatDom {...props} refEndList={refEndList} refMessages={refMessages} fetching={fetching} 
+      setFetching={setFetching} chatId={match.params.chatId} scrollToBottom={scrollToBottom}/>
   )
 }
 
