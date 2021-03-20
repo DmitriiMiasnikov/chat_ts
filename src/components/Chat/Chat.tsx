@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import { ChatDom } from './ChatDom';
 import { withRouter } from 'react-router-dom';
-import { createMessage, getMessages, clearListMessages, deleteMessage, setPageMessages } from './../../store/messageReducer';
+import { createMessage, getMessages, clearListMessages, setPageMessages } from './../../store/messageReducer';
 
 type Props = {
   match: any,
@@ -12,13 +12,12 @@ type Props = {
   pageMessages: number,
   messages: any,
   clearListMessages: () => void,
-  deleteMessage: (id: string) => void,
   setPageMessages: (page: number) => void
 }
 
 const Chat = (props: Props) => {
-  const [getMessages, pageMessages, match, clearListMessages, deleteMessage, messages, setPageMessages] =
-    [props.getMessages, props.pageMessages, props.match, props.clearListMessages, props.deleteMessage, props.messages,
+  const [getMessages, pageMessages, match, clearListMessages, messages, setPageMessages] =
+    [props.getMessages, props.pageMessages, props.match, props.clearListMessages, props.messages,
     props.setPageMessages]
   const [fetching, setFetching] = useState(false);
   const [allMessagesLoaded, setAllMessagesLoaded] = useState(true);
@@ -52,13 +51,13 @@ const Chat = (props: Props) => {
     } else {
       setAllMessagesLoaded(false);
     }
-  }, [messages])
-  
+  }, [messages, pageMessages])
+
   useEffect(() => {
-    if (scrollMessages === 0 && !allMessagesLoaded) {
+    if (scrollMessages === 0 && !allMessagesLoaded && !fetching) {
       setPageMessages(pageMessages + 1);
     }
-  }, [scrollMessages])
+  }, [scrollMessages, allMessagesLoaded, pageMessages, fetching, setPageMessages])
 
   useEffect(() => {
     setFetching(true);
@@ -86,13 +85,10 @@ const Chat = (props: Props) => {
     fetchData()
   }
 
-  const deleteMEssageHandler = (id: string) => {
-    deleteMessage(id);
-  }
-  
+
   return (
-    <ChatDom {...props} newMessageHandler={newMessageHandler} deleteMEssageHandler={deleteMEssageHandler}
-    refEndList={refEndList} refMessages={refMessages} fetching={fetching}/>
+    <ChatDom {...props} newMessageHandler={newMessageHandler}
+      refEndList={refEndList} refMessages={refMessages} fetching={fetching} />
   )
 }
 
@@ -104,5 +100,4 @@ const mapStatesToProps = (state: any) => {
   }
 }
 
-export default withRouter(connect(mapStatesToProps, { createMessage, getMessages, clearListMessages, 
-  deleteMessage, setPageMessages })(Chat))
+export default withRouter(connect(mapStatesToProps, { createMessage, getMessages, clearListMessages, setPageMessages })(Chat))

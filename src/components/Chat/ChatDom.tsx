@@ -2,16 +2,14 @@ import React from 'react';
 import styles from './Chat.module.scss';
 import { Form, Field } from 'react-final-form';
 import classnames from 'classnames';
-import avatarSvg from './../../assets/images/avatar.svg';
-import deleteSvg from './../../assets/images/delete.svg';
 import fetching from './../../assets/images/fetching.svg';
+import Message from './Message/Message';
 
 type Props = {
   match: any,
   newMessageHandler: any,
   messages: any,
   currentUser: { email: string, userName: string, _id: string },
-  deleteMEssageHandler: (id: string) => void,
   getMessages: (page: number, chatId: string) => void,
   refEndList: any,
   refMessages: any,
@@ -24,33 +22,8 @@ export const ChatDom = (props: Props) => {
       <div className={styles.messages} ref={props.refMessages}>
       {props.fetching && <div className={styles.fetching}><img src={fetching} alt='' /></div>}
         {props.messages.map((el: any, i: number) => {
-          const date = new Date(el.date)
           return (
-            <div className={styles.message} key={i}>
-              <div className={styles.leftSide}>
-                <div className={styles.user}>
-                  <img src={avatarSvg} alt='' />
-                  <div className={styles.userName}>
-                    {el.userName}
-                  </div>
-                </div>
-                <div className={styles.cloudMessage}>
-                  <div className={styles.text}>
-                    {el.text}
-                  </div>
-                </div>
-              </div>
-              <div className={styles.rightSide}>
-                <div className={styles.date}>
-                  <div>{date.toLocaleDateString()}</div>
-                  <div>{date.toLocaleTimeString()}</div>
-                </div>
-                <div className={styles.buttonDeleteMessage}>
-                  <img src={deleteSvg} alt='' onClick={() => props.deleteMEssageHandler(el._id)}/>
-                </div>
-              </div>
-
-            </div>
+            <Message message={el} key={i} />
           )
         })}
         <div ref={props.refEndList} />
