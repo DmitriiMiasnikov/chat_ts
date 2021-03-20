@@ -63,6 +63,9 @@ const Chat = (props: Props) => {
   useEffect(() => {
     setFetching(true);
     const fetchData = async () => {
+      if (pageMessages !== 1) {
+        await new Promise(res => setTimeout(res, 500));
+      }
       await getMessages(pageMessages, match.params.chatId);
       setFetching(false);
     }

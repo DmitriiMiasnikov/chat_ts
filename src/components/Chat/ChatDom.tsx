@@ -21,8 +21,8 @@ type Props = {
 export const ChatDom = (props: Props) => {
   return (
     <div className={styles.wrapper}>
-      {props.fetching && <div className={styles.fetching}><img src={fetching} alt='' /></div>}
       <div className={styles.messages} ref={props.refMessages}>
+      {props.fetching && <div className={styles.fetching}><img src={fetching} alt='' /></div>}
         {props.messages.map((el: any, i: number) => {
           const date = new Date(el.date)
           return (
