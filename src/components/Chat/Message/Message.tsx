@@ -4,14 +4,15 @@ import { MessageDom } from './MessageDom';
 import { deleteMessage } from './../../../store/messageReducer';
 
 type Props = {
-  message: {_id: string, chat_id: string, date: any, user_id: string, userName: string, text: string }
+  message: {_id: string, chat_id: string, date: any, user_id: string, userName: string, text: string },
+  deleteMessage: (id: string) => void
 }
 
 const Message = (props: Props) => {
   const date = new Date(props.message.date);
   
   const deleteMessageHandler = (id: string) => {
-    deleteMessage(id);
+    props.deleteMessage(id);
   }
 
   return (

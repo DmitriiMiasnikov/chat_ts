@@ -2,7 +2,7 @@ import avatarSvg from "./../../../assets/images/avatar.svg";
 import deleteSvg from "./../../../assets/images/delete.svg";
 import styled from "styled-components";
 
-const Message = styled.div`
+const MessageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -100,7 +100,7 @@ type Props = {
 
 export const MessageDom = (props: Props) => {
   return (
-    <Message>
+    <MessageWrapper>
       <LeftSide>
         <User>
           <img src={avatarSvg} alt="" />
@@ -123,6 +123,6 @@ export const MessageDom = (props: Props) => {
           />
         </ButtonDeleteMessage>
       </RightSide>
-    </Message>
+    </MessageWrapper>
   );
 };
