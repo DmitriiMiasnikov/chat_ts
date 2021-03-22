@@ -1,5 +1,6 @@
 import { Form, Field } from "react-final-form";
 import styled from "styled-components";
+import { Button } from "../../Button";
 
 const StyledCreateMessage = styled.div`
   background-color: rgb(63, 63, 63);
@@ -46,37 +47,6 @@ const StyledError = styled.div`
   color: var(--font-wrong);
   width: max-content;
 `;
-const StyledButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 110px;
-  height: 40px;
-  margin: 5px;
-  background-color: ${({ disabled }) =>
-    disabled ? "#5d5d5d" : "var(--block)"};
-  border-radius: 8px;
-  border: 0px;
-  transition: 0.2s background-color, 0.2s color;
-  color: ${(props) => (props.disabled ? "#757575" : "white")};
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
-  font-size: 17px;
-
-  &:hover {
-    cursor: pointer;
-    background-color: var(--block-hover);
-  }
-
-  &:focus {
-    outline: none;
-    background-color: var(--block);
-  }
-
-  &.submit {
-    width: 100%;
-    height: 100%;
-  }
-`;
 
 type Props = {
   newMessageHandler: any;
@@ -111,9 +81,7 @@ export const CreateMessageDom = (props: Props) => {
                 )}
               </Field>
             </StyledInputBlock>
-            <StyledButton type="submit" disabled={pristine}>
-              Отправить
-            </StyledButton>
+            <Button disabled={pristine} width={'110px'} height={'40px'}>Отправить</Button>
           </StyledForm>
         )}
       />
