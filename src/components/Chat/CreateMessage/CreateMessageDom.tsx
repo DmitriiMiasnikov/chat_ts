@@ -51,7 +51,7 @@ export const CreateMessageDom = (props: Props) => {
                 )}
               </Field>
             </StyledInputBlock>
-            <Button disabled={pristine} width={"110px"} height={"40px"}>
+            <Button disabled={pristine} width={"110px"} height={"40px"} inputButton={true}>
               Отправить
             </Button>
           </StyledForm>

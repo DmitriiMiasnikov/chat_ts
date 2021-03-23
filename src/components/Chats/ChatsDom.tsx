@@ -73,7 +73,7 @@ export const ChatsDom = (props: Props) => {
                     </StyledInputBlock>
                   );
                 })}
-                <Button disabled={pristine} width={"110px"} height={"40px"}>
+                <Button disabled={pristine} width={"110px"} height={"40px"} inputButton={true}>
                   Создать
                 </Button>
               </StyledForm>

@@ -104,19 +104,30 @@ export const ListItemDom = (props: Props) => {
                     </div>
                   );
                 })}
-                <Button disabled={pristine} width={"160px"} height={"30px"} borderRadius={'4px'} margin={'0px'}>
+                <Button
+                  disabled={pristine}
+                  width={"160px"}
+                  height={"30px"}
+                  borderRadius={"4px"}
+                  margin={"0px 5px"}
+                  inputButton={true}
+                >
                   Переименовать
                 </Button>
               </form>
             )}
           />
         </div>
-        <div
-          className={styles.removeChatButton}
+        <Button
+          width={"160px"}
+          height={"30px"}
+          borderRadius={"4px"}
+          margin={"0px 5px"}
           onClick={() => props.removeChatHandler(props.item.id)}
+          buttonType={"error"}
         >
           Удалить
-        </div>
+        </Button>
       </div>
     </div>
   );
