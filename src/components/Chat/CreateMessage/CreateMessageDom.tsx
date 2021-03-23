@@ -1,6 +1,7 @@
 import { Form, Field } from "react-final-form";
 import styled from "styled-components";
 import { Button } from "../../Button";
+import { Input } from "../../Input";
 
 const StyledCreateMessage = styled.div`
   background-color: rgb(63, 63, 63);
@@ -18,26 +19,6 @@ const StyledInputBlock = styled.div`
   position: relative;
   padding: 0 10px;
   width: calc(100% - 140px);
-`;
-const StyledInput = styled.input`
-  width: 100%;
-  box-sizing: border-box;
-  border: 0px solid transparent;
-  color: var(--font);
-  background-color: var(--input);
-  padding: 8px;
-  transition: 0.1s background-color;
-
-  &:focus {
-    outline: none;
-  }
-
-  &:-internal-autofill-selected {
-    appearance: menulist-button;
-    background-color: var(--input) !important;
-    background-image: none !important;
-    color: var(--font) !important;
-  }
 `;
 const StyledError = styled.div`
   position: absolute;
@@ -68,7 +49,7 @@ export const CreateMessageDom = (props: Props) => {
               <Field name={"message"}>
                 {({ input, meta }) => (
                   <div>
-                    <StyledInput
+                    <Input
                       {...input}
                       type={"text"}
                       placeholder={"Отправить сообщение"}
@@ -81,7 +62,9 @@ export const CreateMessageDom = (props: Props) => {
                 )}
               </Field>
             </StyledInputBlock>
-            <Button disabled={pristine} width={'110px'} height={'40px'}>Отправить</Button>
+            <Button disabled={pristine} width={"110px"} height={"40px"}>
+              Отправить
+            </Button>
           </StyledForm>
         )}
       />
