@@ -8,17 +8,20 @@ const rotation = keyframes`
 100% {
   transform: rotate(360deg);
 }
-`
-const StyledFetching = styled.div<{blockHeight?: string, blockWidth?: string}>`
+`;
+const StyledFetching = styled.div<{
+  blockHeight?: string;
+  blockWidth?: string;
+}>`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: ${({blockHeight}) => blockHeight || '60px'};
-  width: ${({blockWidth}) => blockWidth || '100%'};
+  height: ${({ blockHeight }) => blockHeight || "60px"};
+  width: ${({ blockWidth }) => blockWidth || "100%"};
 `;
-const StyledImage = styled.img<{imageSize?: string}>`
-  width: ${({imageSize}) => imageSize || '35px'};
-  height: ${({imageSize}) => imageSize || '35px'};
+const StyledImage = styled.img<{ imageSize?: string }>`
+  width: ${({ imageSize }) => imageSize || "35px"};
+  height: ${({ imageSize }) => imageSize || "35px"};
   animation-name: ${rotation};
   animation-duration: 1.5s;
   animation-iteration-count: infinite;
@@ -26,9 +29,9 @@ const StyledImage = styled.img<{imageSize?: string}>`
 `;
 
 type Props = {
-  blockWidth?: string,
-  blockHeight?: string,
-  imageSize?: string,
+  blockWidth?: string;
+  blockHeight?: string;
+  imageSize?: string;
 };
 
 export const Fetching = (props: Props) => {

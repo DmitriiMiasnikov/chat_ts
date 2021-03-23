@@ -20,15 +20,6 @@ const StyledInputBlock = styled.div`
   padding: 0 10px;
   width: calc(100% - 140px);
 `;
-const StyledError = styled.div`
-  position: absolute;
-  left: 325px;
-  top: 8px;
-  font-size: 13px;
-  color: var(--font-wrong);
-  width: max-content;
-`;
-
 type Props = {
   newMessageHandler: any;
 };
@@ -55,9 +46,6 @@ export const CreateMessageDom = (props: Props) => {
                       placeholder={"Отправить сообщение"}
                       autoComplete={"off"}
                     />
-                    {meta.error && meta.touched && (
-                      <StyledError>{meta.error}</StyledError>
-                    )}
                   </div>
                 )}
               </Field>
