@@ -1,9 +1,37 @@
-import styles from "./Chats.module.scss";
 import { Form, Field } from "react-final-form";
 import ListItem from "./ListItem/ListItem";
 import { Button } from "./../Button";
-import { Input } from './../Input';
+import { Input } from "./../Input";
 import { Fetching } from "../Fetching";
+import styled from "styled-components";
+
+const StyledWrapper = styled.div`
+  position: relative;
+  height: inherit;
+`;
+const StyledCreateMessage = styled.div`
+  background-color: rgb(63, 63, 63);
+  margin: 10px 10px 0 10px;
+  border-radius: 10px;
+  padding: 5px;
+`;
+const StyledForm = styled.form`
+  display: inline-block;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+const StyledInputBlock = styled.div`
+  position: relative;
+  padding: 0 10px;
+  width: calc(100% - 110px);
+`;
+const StyledList = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+`;
 
 type Props = {
   chats: any;
@@ -15,13 +43,13 @@ type Props = {
 
 export const ChatsDom = (props: Props) => {
   return (
-    <div className={styles.wrapper}>
+    <StyledWrapper>
       {props.currentUser && (
-        <div className={styles.createNewChat}>
+        <StyledCreateMessage>
           <Form
             onSubmit={props.createNewChatHandler}
             render={({ handleSubmit, pristine, form }) => (
-              <form
+              <StyledForm
                 onSubmit={async (event) => {
                   await handleSubmit(event);
                   await form.reset();
@@ -29,9 +57,9 @@ export const ChatsDom = (props: Props) => {
               >
                 {props.inputsCreateChat.map((el, i) => {
                   return (
-                    <div className={styles.inputBlock} key={i}>
+                    <StyledInputBlock key={i}>
                       <Field name={el.name}>
-                        {({ input, meta }) => (
+                        {({ input }) => (
                           <div>
                             <Input
                               {...input}
@@ -39,31 +67,30 @@ export const ChatsDom = (props: Props) => {
                               placeholder={el.text}
                               autoComplete={"off"}
                             />
-                            {meta.error && meta.touched && (
-                              <div className={styles.error}>{meta.error}</div>
-                            )}
                           </div>
                         )}
                       </Field>
-                    </div>
+                    </StyledInputBlock>
                   );
                 })}
                 <Button disabled={pristine} width={"110px"} height={"40px"}>
                   Создать
                 </Button>
-              </form>
+              </StyledForm>
             )}
           />
-        </div>
+        </StyledCreateMessage>
       )}
-      {props.fetching && <Fetching blockWidth={'100%'} blockHeight={'62px'} imageSize={'35px'} />}
+      {props.fetching && (
+        <Fetching blockWidth={"100%"} blockHeight={"62px"} imageSize={"35px"} />
+      )}
       {Boolean(props.chats.length) && (
-        <div className={styles.list}>
+        <StyledList>
           {props.chats.map((el: any, i: number) => {
             return <ListItem item={el} key={i} />;
           })}
-        </div>
+        </StyledList>
       )}
-    </div>
+    </StyledWrapper>
   );
 };

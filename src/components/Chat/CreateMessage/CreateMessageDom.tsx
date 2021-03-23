@@ -6,6 +6,7 @@ import { Input } from "../../Input";
 const StyledCreateMessage = styled.div`
   background-color: rgb(63, 63, 63);
   margin: 10px 10px 10px 10px;
+  padding: 5px;
   border-radius: 10px;
 `;
 const StyledForm = styled.form`
@@ -18,7 +19,7 @@ const StyledForm = styled.form`
 const StyledInputBlock = styled.div`
   position: relative;
   padding: 0 10px;
-  width: calc(100% - 140px);
+  width: calc(100% - 110px);
 `;
 type Props = {
   newMessageHandler: any;
@@ -38,7 +39,7 @@ export const CreateMessageDom = (props: Props) => {
           >
             <StyledInputBlock>
               <Field name={"message"}>
-                {({ input, meta }) => (
+                {({ input }) => (
                   <div>
                     <Input
                       {...input}

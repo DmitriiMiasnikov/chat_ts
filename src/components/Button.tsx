@@ -1,14 +1,14 @@
 import styled, { css } from "styled-components";
 
-const StyledButton = styled.button<{width?: string}>`
+const StyledButton = styled.button<{width?: string, height?: string, borderRadius?: string, margin?: string}>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: ${(props) => props.width || '110px'};
-  height: 40px;
-  margin: 5px;
+  height: ${(props) => props.height || '40px'};
+  margin: ${(props) => props.margin || '0px'};
   background-color: "var(--block)";
-  border-radius: 8px;
+  border-radius: ${(props) => props.borderRadius || '8px'};
   border: 0px;
   transition: 0.2s background-color, 0.2s color;
   color: "white";
@@ -43,6 +43,8 @@ type Props = {
   children?: string;
   width?: string;
   height?: string;
+  borderRadius?: string;
+  margin?: string;
 };
 
 export const Button = (props: Props) => {
