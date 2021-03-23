@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Chat.module.scss';
-import fetching from './../../assets/images/fetching.svg';
 import Message from './Message/Message';
 import CreateMessage from './CreateMessage/CreateMessage';
+import { Fetching } from './../Fetching';
 
 type Props = {
   messages: any,
@@ -19,7 +19,7 @@ export const ChatDom = (props: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.messages} ref={props.refMessages}>
-        {props.fetching && <div className={styles.fetching}><img src={fetching} alt='' /></div>}
+        {props.fetching && <Fetching blockWidth={'100%'} blockHeight={'40px'} imageSize={'35px'} />}
         {props.messages.map((el: any, i: number) => {
           return (
             <Message message={el} key={i} />
