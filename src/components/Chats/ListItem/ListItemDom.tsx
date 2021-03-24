@@ -1,9 +1,27 @@
-import React, { useRef, useEffect } from "react";
-import styles from "./ListItem.module.scss";
+import { useRef, useEffect } from "react";
 import edit from "./../../../assets/images/edit.svg";
-import classnames from "classnames";
 import { NavLink } from "react-router-dom";
 import EditBlock from "./EditBlock";
+import styled from "styled-components";
+import { FlexBlock } from "../../FlexBlock";
+import { Button } from "../../Button";
+
+const StyledListItemWrapper = styled.div`
+  position: relative;
+  box-sizing: border-box;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 5px 15px;
+  margin: 10px 10px 0px 10px;
+  transition: 0.2s border-color, 0.2s background-color;
+  border: 1px solid #6e6e6e;
+  box-shadow: 1px 1px 1px 0px #6e6e6e;
+  &:hover {
+    border-color: #b7b7b7;
+    background-color: rgba(255, 255, 255, 0.055);
+  }
+`;
 
 type Props = {
   item: { userName: string; title: string; date: string; id: string };
@@ -42,36 +60,46 @@ export const ListItemDom = (props: Props) => {
   });
 
   return (
-    <div className={styles.wrapper} ref={refListItem}>
-      <div className={styles.mainBlock}>
-        <NavLink to={`/chat/${props.item.id}`} className={styles.leftSide}>
-          <div className={styles.title}>{props.item.title}</div>
+    <StyledListItemWrapper ref={refListItem}>
+      <FlexBlock direction={"row"} justifyContent={"space-between"}>
+        <NavLink
+          to={`/chat/${props.item.id}`}
+          style={{ width: "100%", height: "100%", textDecoration: "none" }}
+        >
+          <FlexBlock justifyContent={"flex-start"}>
+            {props.item.title}
+          </FlexBlock>
         </NavLink>
-        <div className={styles.rightSide}>
-          <div className={styles.userInfo}>
-            <div className={styles.userName}>Автор: {props.item.userName}</div>
-            <div className={styles.date}>
+        <FlexBlock justifyContent={"flex-end"}>
+          <FlexBlock direction={"column"} justifyContent={"space-around"}>
+            <FlexBlock justifyContent={"flex-end"} fontSize={"13px"}>
+              Автор: {props.item.userName}
+            </FlexBlock>
+            <FlexBlock justifyContent={"flex-end"} fontSize={"12px"}>
               Дата создания: {props.date.toLocaleDateString()}
-            </div>
-          </div>
+            </FlexBlock>
+          </FlexBlock>
           {props.isAuth && props.isMyChat && (
-            <div
-              className={classnames(styles.editButton)}
-              onClick={(e) => {
+            <Button
+              width={"30px"}
+              height={"40px"}
+              borderRadius={"4px"}
+              margin={"0px 5px"}
+              onClick={(e: any) => {
                 e.preventDefault();
                 props.showEditBlockHandler(!props.showEditBlock);
               }}
             >
               <img src={edit} alt="" />
-            </div>
+            </Button>
           )}
-        </div>
-      </div>
+        </FlexBlock>
+      </FlexBlock>
       <EditBlock
         id={props.item.id}
         setShowEditBlock={props.setShowEditBlock}
         show={props.showEditBlock}
       />
-    </div>
+    </StyledListItemWrapper>
   );
 };

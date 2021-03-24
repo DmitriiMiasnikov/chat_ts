@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledList = styled.div<{ listDirection?: string }>`
 display: flex;
-flex-direction: ${({listDirection}) => listDirection || 'column'};
+flex-direction: ${({listDirection}) => listDirection || 'row'};
 overflow: auto;
 `;
 

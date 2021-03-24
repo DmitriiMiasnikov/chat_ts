@@ -81,13 +81,13 @@ const StyledButton = styled.div<{
 
 type Props = {
   disabled?: boolean;
-  children?: string;
+  children?: any;
   width?: string;
   height?: string;
   borderRadius?: string;
   margin?: string;
   inputButton?: boolean;
-  onClick?: () => void;
+  onClick?: (e?: any) => void;
   buttonType?: string;
 };
 
