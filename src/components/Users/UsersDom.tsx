@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './Users.module.scss';
 
 type Props = {
   users: any
@@ -7,9 +6,9 @@ type Props = {
 
 export const UsersDom = (props: Props) => {
   return (
-    <div className={styles.wrapper}>
-      {Boolean(props.users.length) && props.users.map((el: any) => {
-        return <div>{el.userName}</div>
+    <div>
+      {Boolean(props.users.length) && props.users.map((el: any, i: number) => {
+        return <div key={i}>{el.userName}</div>
       })}
     </div>
   )

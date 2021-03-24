@@ -2,21 +2,17 @@ import React, { useRef, useEffect } from "react";
 import styles from "./ListItem.module.scss";
 import edit from "./../../../assets/images/edit.svg";
 import classnames from "classnames";
-import { Form, Field } from "react-final-form";
 import { NavLink } from "react-router-dom";
-import { Input } from "./../../Input";
-import { Button } from "./../../Button";
+import EditBlock from "./EditBlock";
 
 type Props = {
   item: { userName: string; title: string; date: string; id: string };
   date: Date;
-  removeChatHandler: (id: string) => void;
   showEditBlock: boolean;
   showEditBlockHandler: (show: boolean) => void;
-  renameChatHandler: any;
-  inputsRenameChat: { name: string; text: string }[];
   isAuth: boolean;
   isMyChat: boolean;
+  setShowEditBlock: (show: boolean) => void;
 };
 
 export const ListItemDom = (props: Props) => {
@@ -71,64 +67,11 @@ export const ListItemDom = (props: Props) => {
           )}
         </div>
       </div>
-      <div
-        className={classnames(styles.editBlock, {
-          [styles.show]: props.showEditBlock,
-        })}
-      >
-        <div className={styles.renameChat}>
-          <Form
-            onSubmit={props.renameChatHandler}
-            render={({ handleSubmit, pristine, form }) => (
-              <form
-                onSubmit={async (event) => {
-                  await handleSubmit(event);
-                  await form.reset();
-                }}
-              >
-                {props.inputsRenameChat.map((el, i) => {
-                  return (
-                    <div className={styles.inputBlock} key={i}>
-                      <Field name={el.name}>
-                        {({ input }) => (
-                          <div>
-                            <Input
-                              {...input}
-                              type={"text"}
-                              placeholder={el.text}
-                              autoComplete={"off"}
-                            />
-                          </div>
-                        )}
-                      </Field>
-                    </div>
-                  );
-                })}
-                <Button
-                  disabled={pristine}
-                  width={"160px"}
-                  height={"30px"}
-                  borderRadius={"4px"}
-                  margin={"0px 5px"}
-                  inputButton={true}
-                >
-                  Переименовать
-                </Button>
-              </form>
-            )}
-          />
-        </div>
-        <Button
-          width={"160px"}
-          height={"30px"}
-          borderRadius={"4px"}
-          margin={"0px 5px"}
-          onClick={() => props.removeChatHandler(props.item.id)}
-          buttonType={"error"}
-        >
-          Удалить
-        </Button>
-      </div>
+      <EditBlock
+        id={props.item.id}
+        setShowEditBlock={props.setShowEditBlock}
+        show={props.showEditBlock}
+      />
     </div>
   );
 };

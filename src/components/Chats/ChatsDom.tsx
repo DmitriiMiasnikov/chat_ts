@@ -4,6 +4,7 @@ import { Button } from "./../Button";
 import { Input } from "./../Input";
 import { Fetching } from "../Fetching";
 import styled from "styled-components";
+import { List } from "../List";
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -26,11 +27,6 @@ const StyledInputBlock = styled.div`
   position: relative;
   padding: 0 10px;
   width: calc(100% - 110px);
-`;
-const StyledList = styled.div`
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
 `;
 
 type Props = {
@@ -85,11 +81,11 @@ export const ChatsDom = (props: Props) => {
         <Fetching blockWidth={"100%"} blockHeight={"62px"} imageSize={"35px"} />
       )}
       {Boolean(props.chats.length) && (
-        <StyledList>
+        <List listDirection={'column'}>
           {props.chats.map((el: any, i: number) => {
             return <ListItem item={el} key={i} />;
           })}
-        </StyledList>
+        </List>
       )}
     </StyledWrapper>
   );
