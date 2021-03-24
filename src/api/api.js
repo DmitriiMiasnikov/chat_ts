@@ -16,6 +16,10 @@ export const userApi = {
   async getUser(id) {
     const res = await instance.get(`users/id/${id}`);
     return res;
+  },
+  async getUsers(page) {
+    const res = await instance.get(`users/list/${page}`)
+    return res;
   }
 }
 

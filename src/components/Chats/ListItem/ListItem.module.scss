@@ -101,20 +101,5 @@
         }
       }
     }
-    .removeChatButton {
-      padding: 0 10px;
-      margin-left: 10px;
-      height: 30px;
-      border-radius: 4px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: rgb(177, 63, 63);
-      transition: .2s background-color;
-      &:hover {
-        cursor: pointer;
-        background-color: rgb(153, 58, 58);
-      }
-    }
   }
 }
