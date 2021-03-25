@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import EditBlock from "./EditBlock";
 import styled from "styled-components";
 import { FlexBlock } from "../../FlexBlock";
-import { Button } from "../../Button";
 
 const StyledListItemWrapper = styled.div`
   position: relative;
@@ -20,6 +19,23 @@ const StyledListItemWrapper = styled.div`
   &:hover {
     border-color: #b7b7b7;
     background-color: rgba(255, 255, 255, 0.055);
+  }
+`;
+
+const StyledChatInfo = styled.div<{fontSize?: string}>`
+  display: flex;
+  justify-content: flex-end;
+  text-align: end;
+  width: max-content;
+  min-width: 100%;
+  font-size: ${({ fontSize }) => fontSize || '15px'}
+`;
+
+const StyledImageEditButton = styled.img`
+  width: 100%;
+  height: 100%;
+  &:hover {
+    cursor: pointer;
   }
 `;
 
@@ -72,26 +88,22 @@ export const ListItemDom = (props: Props) => {
         </NavLink>
         <FlexBlock justifyContent={"flex-end"}>
           <FlexBlock direction={"column"} justifyContent={"space-around"}>
-            <FlexBlock justifyContent={"flex-end"} fontSize={"13px"}>
-              Автор: {props.item.userName}
-            </FlexBlock>
-            <FlexBlock justifyContent={"flex-end"} fontSize={"12px"}>
+            <StyledChatInfo fontSize={'13px'}>Автор: {props.item.userName}</StyledChatInfo>
+            <StyledChatInfo  fontSize={'12px'}>
               Дата создания: {props.date.toLocaleDateString()}
-            </FlexBlock>
+            </StyledChatInfo>
           </FlexBlock>
           {props.isAuth && props.isMyChat && (
-            <Button
-              width={"30px"}
-              height={"40px"}
-              borderRadius={"4px"}
-              margin={"0px 5px"}
-              onClick={(e: any) => {
-                e.preventDefault();
-                props.showEditBlockHandler(!props.showEditBlock);
-              }}
-            >
-              <img src={edit} alt="" />
-            </Button>
+            <FlexBlock width={"30px"} height={"40px"} margin={'0 0 0 10px'}>
+              <StyledImageEditButton
+                src={edit}
+                alt=""
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  props.showEditBlockHandler(!props.showEditBlock);
+                }}
+              />
+            </FlexBlock>
           )}
         </FlexBlock>
       </FlexBlock>

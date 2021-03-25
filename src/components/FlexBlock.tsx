@@ -6,6 +6,10 @@ const StyledFlexBlock = styled.div<{
   justifyContent?: string;
   color?: string;
   fontSize?: string;
+  width?: string;
+  height?: string;
+  overflow?: string;
+  margin?: string;
 }>`
   display: flex;
   flex-direction: ${({ direction }) => direction || "row"};
@@ -13,7 +17,10 @@ const StyledFlexBlock = styled.div<{
   justify-content: ${({ justifyContent }) => justifyContent || "center"};
   color: ${({ color }) => color || "#c7c7c7"};
   font-size: ${({ fontSize }) => fontSize || "15px"};
-  overflow: auto;
+  width: ${({ width }) => width || "inherit"};
+  height: ${({ height }) => height || "inherit"};
+  overflow: ${({ overflow }) => overflow || "visible"};
+  margin: ${({ margin }) => margin || "0px"};
 `;
 
 type Props = {
@@ -23,6 +30,10 @@ type Props = {
   children?: any;
   color?: string;
   fontSize?: string;
+  width?: string;
+  height?: string;
+  overflow?: string;
+  margin?: string;
 };
 
 export const FlexBlock = (props: Props) => {
