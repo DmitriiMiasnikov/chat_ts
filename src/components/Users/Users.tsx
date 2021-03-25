@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { UsersDom } from './UsersDom';
 import { getUsers } from './../../store/userReducer';
@@ -11,16 +11,19 @@ type Props = {
 
 const Users = (props: Props) => {
   const [getUsers, usersPage] = [props.getUsers, props.usersPage];
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
+    setFetching(true);
     const fetchData = async () => {
-      getUsers(usersPage)
+      getUsers(usersPage);
+      setFetching(false);
     }
     fetchData()
   }, [getUsers, usersPage])
 
   return (
-    <UsersDom {...props}/>
+    <UsersDom {...props} fetching={fetching}/>
   )
 }
 
