@@ -42,4 +42,4 @@ export const getUsers = (page: number) => {
     const res = await userApi.getUsers(page);
     dispatch(getUsersFunc(res.data.users));
   }
-} 
+}
