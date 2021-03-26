@@ -46,12 +46,26 @@ type Props = {
 };
 
 const ItemList = (props: Props) => {
+  const [user] = [props.user];
+  
+  let countChatsText, countMessagesText;
+  if (['2', '3', '4'].includes(user.chatsCount.toString().slice(-1))) {
+    countChatsText = 'чата'
+  } else if (user.chatsCount.toString().slice(-1) === '1') {
+    countChatsText = 'чат'
+  } else countChatsText = 'чатов'
+  if (['2', '3', '4'].includes(user.messagesCount.toString().slice(-1))) {
+    countMessagesText = 'сообщения'
+  } else if (user.chatsCount.toString().slice(-1) === '1') {
+    countMessagesText = 'сообщение'
+  } else countMessagesText = 'сообщений'
+
   return (
-    <StyledItemList to={`user/${props.user.id}`}>
-      <StyledUserName>{props.user.userName}</StyledUserName>
+    <StyledItemList to={`user/${user.id}`}>
+      <StyledUserName>{user.userName}</StyledUserName>
       <StyledUserInfo>
-        <div>{props.user.chatsCount} чата(ов)</div>
-        <div>{props.user.messagesCount} сообщения(й)</div>
+        <div>{user.chatsCount} {countChatsText}</div>
+        <div>{user.messagesCount} {countMessagesText}</div>
       </StyledUserInfo>
     </StyledItemList>
   );
