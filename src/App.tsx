@@ -10,6 +10,7 @@ import Registration from './components/Registration/Registration';
 import Users from './components/Users/Users';
 import Chat from './components/Chat/Chat';
 import { setWindowSize, setIsMobile } from './store/mainSettingsReducer';
+import User from './components/User/User';
 
 type Props = {
   showAuthorization: boolean,
@@ -56,6 +57,7 @@ const App = (props: Props) => {
           <Route path={'/chats'} render={() => <Chats />} />
           <Route path={'/chat/:chatId'} render={() => <Chat />} />
           <Route path={'/users'} render={() => <Users />} />
+          <Route path={'/user/:userId'} render={() => <User />} />
         </Switch>
       </div>
       {props.showAuthorization && <Auth />}
