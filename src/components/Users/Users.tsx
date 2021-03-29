@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { UsersDom } from './UsersDom';
-import { getUsers } from './../../store/userReducer';
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { UsersDom } from "./UsersDom";
+import { getUsers } from "./../../store/userReducer";
 
 type Props = {
-  getUsers: (page: number) => void,
-  usersPage: number,
-  users: any
-}
+  getUsers: (page: number) => void;
+  usersPage: number;
+  users: any;
+};
 
 const Users = (props: Props) => {
   const [getUsers, usersPage] = [props.getUsers, props.usersPage];
@@ -16,21 +16,19 @@ const Users = (props: Props) => {
   useEffect(() => {
     setFetching(true);
     const fetchData = async () => {
-      getUsers(usersPage);
+      await getUsers(usersPage);
       setFetching(false);
-    }
-    fetchData()
-  }, [getUsers, usersPage])
+    };
+    fetchData();
+  }, [getUsers, usersPage]);
 
-  return (
-    <UsersDom {...props} fetching={fetching}/>
-  )
-}
+  return <UsersDom {...props} fetching={fetching} />;
+};
 
 const mapStatesToProps = (state: any) => {
   return {
     usersPage: state.user.usersPage,
-    users: state.user.users
-  }
-}
-export default connect(mapStatesToProps, { getUsers })(Users)
+    users: state.user.users,
+  };
+};
+export default connect(mapStatesToProps, { getUsers })(Users);

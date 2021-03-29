@@ -13,12 +13,12 @@ export const UsersDom = (props: Props) => {
       {props.fetching && (
         <Fetching blockWidth={"100%"} blockHeight={"60px"} imageSize={"35px"} />
       )}
-      <List listDirection={"column"}>
+      {!props.fetching && <List listDirection={"column"}>
         {Boolean(props.users.length) &&
           props.users.map((el: any, i: number) => {
             return <ItemList user={el} key={i} />;
           })}
-      </List>
+      </List>}
     </div>
   );
 };

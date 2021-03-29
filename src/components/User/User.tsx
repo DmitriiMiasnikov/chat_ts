@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { UserDom } from "./UserDom";
@@ -22,10 +22,13 @@ type Props = {
 
 const User = (props: Props) => {
   const [getUser, clearUser] = [props.getUser, props.clearUser];
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
+    setFetching(true);
     const fetchData = async () => {
       await getUser(props.match.params.userId);
+      setFetching(false);
     };
     fetchData();
   }, [getUser, props.match.params.userId]);
@@ -34,7 +37,7 @@ const User = (props: Props) => {
     return () => clearUser()
   }, [clearUser])
 
-  return <UserDom {...props} />;
+  return <UserDom {...props} fetching={fetching}/>;
 };
 
 const mapStatesToProps = (state: any) => {
