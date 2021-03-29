@@ -80,7 +80,7 @@ export const ListItemDom = (props: Props) => {
       <FlexBlock direction={"row"} justifyContent={"space-between"}>
         <NavLink
           to={`/chat/${props.item.id}`}
-          style={{ width: "100%", height: "100%", textDecoration: "none" }}
+          style={{ width: "100%", padding: "7px 0", textDecoration: "none" }}
         >
           <FlexBlock justifyContent={"flex-start"}>
             {props.item.title}

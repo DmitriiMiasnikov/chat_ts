@@ -43,11 +43,11 @@ const StyledUserInfo = styled.div`
 
 type Props = {
   user: any;
+  currentUser: any
 };
 
 const ItemList = (props: Props) => {
-  const [user] = [props.user];
-  
+  const [user, currentUser] = [props.user, props.currentUser];
   let countChatsText, countMessagesText;
   if (['2', '3', '4'].includes(user.chatsCount.toString().slice(-1))) {
     countChatsText = 'чата'
@@ -62,7 +62,7 @@ const ItemList = (props: Props) => {
 
   return (
     <StyledItemList to={`user/${user.id}`}>
-      <StyledUserName>{user.userName}</StyledUserName>
+      <StyledUserName>{user.userName} {currentUser && currentUser._id === user.id && '(я)'}</StyledUserName>
       <StyledUserInfo>
         <div>{user.chatsCount} {countChatsText}</div>
         <div>{user.messagesCount} {countMessagesText}</div>
@@ -72,7 +72,9 @@ const ItemList = (props: Props) => {
 };
 
 const mapStatesToProps = (state: any) => {
-  return {};
+  return {
+    currentUser: state.auth.currentUser
+  };
 };
 
 export default connect(mapStatesToProps, {})(ItemList);
